@@ -31,9 +31,9 @@
 
 Ofer Elfassi - [@Linkedin](https://www.linkedin.com/in/oferelfassi) - ofer2212@gmail.com
 
-Dekel Ben-David - [@Linkedin](https://www.linkedin.com/in/Dekelbd) - dekeldbd@gmail.com
+Dekel Ben-David - [@Linkedin](https://www.linkedin.com/in/dekel-ben-david) - dekeldbd@gmail.com
 
-Guitit Amar - [@Linkedin](https://www.linkedin.com/in/guitit) - guitit123@gmail.com
+Guitit Amar - [@Linkedin](https://www.linkedin.com/in/גיתית-עמר-b960621ba) - guitit123@gmail.com
 
 Project Link: [https://github.com/OferElfassi/ER-Assist](https://github.com/OferElfassi/ER-Assist)
 
