@@ -12,6 +12,9 @@
     An awesome app made for recording and documenting medical operations
     <br />
     <a href="#"><strong>Explore the Application docs »</strong></a>
+<br />
+    <a href="https://github.com/OferElfassi/blackjack/files/7668481/ER-Assist.SRS.pdf"><strong>SRS </strong></a>|
+    <a href="https://github.com/OferElfassi/blackjack/files/7668480/SDD.pdf"><strong>SDD</strong></a>
     <br />
     <br />
     <a href="#">API Endpoint</a>
