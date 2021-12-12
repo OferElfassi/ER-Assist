@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
-import {setMainRoot} from '../Navigation';
+import {setMainRoot} from '../navigation';
 
 const LoginScreen = () => {
   return (
