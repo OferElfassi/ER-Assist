@@ -1,11 +1,12 @@
 import React from 'react';
-import {StyleSheet, Text} from 'react-native';
+import {Button, StyleSheet, Text, View} from 'react-native';
+import {setMainRoot} from '../Navigation';
 
-const Login = props => {
+const LoginScreen = () => {
   return (
-    <view style={styles.root}>
-      <Text>Login</Text>
-    </view>
+    <View style={styles.root}>
+      <Button title="Login" color="#710ce3" onPress={() => setMainRoot()} />
+    </View>
   );
 };
 
@@ -18,4 +19,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Login;
+export default LoginScreen;

@@ -1,11 +1,12 @@
 import React from 'react';
-import {StyleSheet, Text} from 'react-native';
+import {Button, StyleSheet, Text, View} from 'react-native';
+import {setMainRoot} from '../Navigation';
 
-const Signup = props => {
+const SignupScreen = () => {
   return (
-    <view style={styles.root}>
-      <Text>Signup</Text>
-    </view>
+    <View style={styles.root}>
+      <Button title="Signup" color="#710ce3" onPress={() => setMainRoot()} />
+    </View>
   );
 };
 
@@ -18,4 +19,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Signup;
+export default SignupScreen;

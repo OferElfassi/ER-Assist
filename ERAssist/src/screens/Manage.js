@@ -1,12 +1,19 @@
 import React from 'react';
-import {StyleSheet, Text} from 'react-native';
+import {Button, StyleSheet, Text, View} from 'react-native';
 
-const Manage = props => {
+const ManageScreen = props => {
   return (
-    <view style={styles.root}>
-      <Text>Manage</Text>
-    </view>
+    <View style={styles.root}>
+      <Text>Hello Manage Screen 👋</Text>
+    </View>
   );
+};
+ManageScreen.options = {
+  topBar: {
+    title: {
+      text: 'ManageScreen',
+    },
+  },
 };
 
 const styles = StyleSheet.create({
@@ -18,4 +25,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Manage;
+export default ManageScreen;

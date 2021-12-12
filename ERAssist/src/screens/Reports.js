@@ -1,12 +1,19 @@
 import React from 'react';
-import {StyleSheet, Text} from 'react-native';
+import {Button, StyleSheet, Text, View} from 'react-native';
 
-const Reports = props => {
+const ReportsScreen = props => {
   return (
-    <view style={styles.root}>
-      <Text>Reports</Text>
-    </view>
+    <View style={styles.root}>
+      <Text>Hello Reports Screen 👋</Text>
+    </View>
   );
+};
+ReportsScreen.options = {
+  topBar: {
+    title: {
+      text: 'ReportsScreen',
+    },
+  },
 };
 
 const styles = StyleSheet.create({
@@ -18,4 +25,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Reports;
+export default ReportsScreen;

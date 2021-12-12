@@ -1,12 +1,19 @@
 import React from 'react';
-import {StyleSheet, Text} from 'react-native';
+import {Button, StyleSheet, Text, View} from 'react-native';
 
-const Forms = props => {
+const FormsScreen = props => {
   return (
-    <view style={styles.root}>
-      <Text>Forms</Text>
-    </view>
+    <View style={styles.root}>
+      <Text>Hello Forms Screen 👋</Text>
+    </View>
   );
+};
+FormsScreen.options = {
+  topBar: {
+    title: {
+      text: 'FormsScreen',
+    },
+  },
 };
 
 const styles = StyleSheet.create({
@@ -18,4 +25,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Forms;
+export default FormsScreen;
