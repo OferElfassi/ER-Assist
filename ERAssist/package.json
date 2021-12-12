@@ -10,9 +10,9 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "galio-framework": "^0.8.0",
     "react": "17.0.2",
     "react-native": "0.66.3",
+    "react-native-ui-lib": "^6.5.4",
     "react-native-vector-icons": "^9.0.0"
   },
   "devDependencies": {
