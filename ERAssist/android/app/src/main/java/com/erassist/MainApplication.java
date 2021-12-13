@@ -12,6 +12,9 @@ import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
+import com.facebook.react.bridge.JSIModulePackage; // <- add
+import com.swmansion.reanimated.ReanimatedJSIModulePackage; // <- add
+
 public class MainApplication extends NavigationApplication {
 
   private final ReactNativeHost mReactNativeHost =
@@ -34,6 +37,12 @@ public class MainApplication extends NavigationApplication {
         protected String getJSMainModuleName() {
           return "index";
         }
+
+        @Override
+        protected JSIModulePackage getJSIModulePackage() {
+        return new ReanimatedJSIModulePackage(); // <- add
+        }
+
       };
 
   @Override
@@ -44,7 +53,7 @@ public class MainApplication extends NavigationApplication {
   @Override
   public void onCreate() {
     super.onCreate();
-    
+
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
   }
 

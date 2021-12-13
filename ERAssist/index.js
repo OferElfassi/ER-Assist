@@ -4,7 +4,10 @@
  */
 import {Navigation} from 'react-native-navigation';
 import {setAuthRoot, setMainRoot, registerScreens} from './src/navigation';
+import {loadColorsSettings, loadColorScheme} from './src/theam/colors';
 
+loadColorsSettings();
+loadColorScheme('light');
 registerScreens();
 
 const isUserLoggedIn = () => {

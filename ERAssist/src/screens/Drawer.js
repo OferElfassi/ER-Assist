@@ -137,9 +137,9 @@ const Drawer = props => {
               },
             },
           });
-          Navigation.push(props.componentId, {
+          Navigation.push('MainStack', {
             component: {
-              name: 'com.erAssist.main.forms',
+              name: 'com.erAssist.main.manage',
             },
           });
         }}>
