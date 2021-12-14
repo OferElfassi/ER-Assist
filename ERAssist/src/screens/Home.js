@@ -7,32 +7,50 @@ const reports = [
   {
     id: '123',
     date: '20/02/21 16:20',
-    patient: 'Yoram Schwartz',
+    patient: {name: 'Yoram Schwartz', id: '87654321'},
     reporter: 'Mali Levi',
-    type: 'Evacuation Report',
+    medicines: [{name: 'attent', amount: 30}],
+    anamnesis: 'bala bla bla bla',
+    treatment: [{action: '', timeStamp: ''}],
   },
   {
     id: '123',
     date: '20/02/21 16:20',
-    patient: 'Yoram Schwartz',
+    patient: {name: 'Yoram Schwartz', id: '87654321'},
     reporter: 'Mali Levi',
-    type: 'Evacuation Report',
+    medicines: [{name: 'attent', amount: 30}],
+    anamnesis: 'bala bla bla bla',
+    treatment: [{action: '', timeStamp: ''}],
   },
   {
     id: '123',
     date: '20/02/21 16:20',
-    patient: 'Yoram Schwartz',
+    patient: {name: 'Yoram Schwartz', id: '87654321'},
     reporter: 'Mali Levi',
-    type: 'Evacuation Report',
+    medicines: [{name: 'attent', amount: 30}],
+    anamnesis: 'bala bla bla bla',
+    treatment: [{action: '', timeStamp: ''}],
   },
   {
     id: '123',
     date: '20/02/21 16:20',
-    patient: 'Yoram Schwartz',
+    patient: {name: 'Yoram Schwartz', id: '87654321'},
     reporter: 'Mali Levi',
-    type: 'Evacuation Report',
+    medicines: [{name: 'attent', amount: 30}],
+    anamnesis: 'bala bla bla bla',
+    treatment: [{action: '', timeStamp: ''}],
+  },
+  {
+    id: '123',
+    date: '20/02/21 16:20',
+    patient: {name: 'Yoram Schwartz', id: '87654321'},
+    reporter: 'Mali Levi',
+    medicines: [{name: 'attent', amount: 30}],
+    anamnesis: 'bala bla bla bla',
+    treatment: [{action: '', timeStamp: ''}],
   },
 ];
+
 const IconInCircle = ({
   circleSize,
   borderWidth = 2,
@@ -70,7 +88,7 @@ const HomeScreen = props => {
           <Button
             outline
             outlineColor={Colors.pink}
-            label="START HERE"
+            label="REPORT NOW"
             borderRadius={0}
             size={Button.sizes.medium}
             text60
@@ -100,8 +118,20 @@ const HomeScreen = props => {
             <FlatList
               data={reports}
               renderItem={({item}) => (
-                <View>
-                  <Text>{item.id}</Text>
+                <View marginB-5 style={{borderWidth: 1, borderColor: 'black'}}>
+                  <View flex row spread>
+                    <View flex row>
+                      <Text>patient:</Text>
+                      <Text>{item.patient.name}</Text>
+                    </View>
+                    <View flex row>
+                      <Text>reporter:</Text>
+                      <Text>{item.patient.name}</Text>
+                    </View>
+                  </View>
+                  <View flex>
+                    <Text>{item.date}</Text>
+                  </View>
                 </View>
               )}
             />
