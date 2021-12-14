@@ -1,5 +1,5 @@
 /**
- * ER-Assist App
+ * ER-Assist Apppp
  * https://github.com/OferElfassi/ER-Assist
  */
 import {Navigation} from 'react-native-navigation';
