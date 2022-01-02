@@ -15,6 +15,7 @@ import {
 } from 'react-native-ui-lib';
 import CustomWizard from '../components/CustomWizard/CustomWizard';
 import CustomRadio from '../components/CustomRadio/CustomRadio';
+import CustomPicker from '../components/CustomPicker/CustomPicker';
 
 /**
  * username
@@ -36,6 +37,12 @@ const options = [
 const roleOptions = [
   {value: 0, label: 'Reporter'},
   {value: 1, label: 'Manager'},
+];
+
+const organizationOptions = [
+  {label: 'Ichilov', value: 'ichilov'},
+  {label: 'Rambam', value: 'rambam'},
+  {label: 'Ziv', value: 'ziv'},
 ];
 
 const roles = ['Reporter', 'Manager'];
@@ -61,6 +68,7 @@ const SignupScreen = () => {
     );
   };
   const onRoleChange = role => {};
+  const onOrganizationChange = organization => {};
   const organizationInfoForm = () => {
     return (
       <View style={styles.formContainer}>
@@ -69,15 +77,30 @@ const SignupScreen = () => {
           title={'Select Role'}
           onChange={onRoleChange}
           row
+          marginT-15
         />
-        {/*<RadioGroup*/}
-        {/*  initialValue={selectedRoleIndex}*/}
-        {/*  onValueChange={setSelectedRoleIndex}>*/}
-        {/*  <View row marginT-10>*/}
-        {/*    {renderRolesRadioButton(0)}*/}
-        {/*    {renderRolesRadioButton(1)}*/}
-        {/*  </View>*/}
-        {/*</RadioGroup>*/}
+        <CustomPicker
+          options={organizationOptions}
+          title={'Choose Organization'}
+          onChange={onOrganizationChange}
+        />
+        <View style={[styles.formContainer, {opacity: 0.3}]}>
+          <Text marginB-20 text60 grey10>
+            Add Organization
+          </Text>
+          <TextField
+            editable={false}
+            text80
+            placeholder="Organization Name"
+            grey10
+          />
+          <TextField
+            text80
+            placeholder="Organization Address"
+            grey10
+            editable={false}
+          />
+        </View>
       </View>
     );
   };

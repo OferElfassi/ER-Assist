@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import {View, Text, RadioButton, RadioGroup} from 'react-native-ui-lib';
 
 const CustomRadio = props => {
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState(
+    props.initialValue || props.options[0].value,
+  );
 
   const renderRadioButton = (value, text) => {
     return (
@@ -19,18 +21,20 @@ const CustomRadio = props => {
   };
 
   return (
-    <RadioGroup
-      initialValue={selectedOption || 0}
-      onValueChange={onValueChange}>
-      <Text marginB-20 text70 grey10>
-        {props.title}
-      </Text>
-      <View row={props.row}>
-        {props.options.map(option => {
-          return renderRadioButton(option.value, option.label);
-        })}
-      </View>
-    </RadioGroup>
+    <View {...props}>
+      <RadioGroup
+        initialValue={selectedOption || 0}
+        onValueChange={onValueChange}>
+        <Text marginB-20 text60 grey10>
+          {props.title}
+        </Text>
+        <View row={props.row}>
+          {props.options.map(option => {
+            return renderRadioButton(option.value, option.label);
+          })}
+        </View>
+      </RadioGroup>
+    </View>
   );
 };
 CustomRadio.propTypes = {
@@ -42,7 +46,9 @@ CustomRadio.propTypes = {
   ),
   onChange: PropTypes.func,
   title: PropTypes.string,
+  initialValue: PropTypes.string,
   row: PropTypes.bool,
+  style: PropTypes.object,
 };
 const styles = StyleSheet.create({});
 

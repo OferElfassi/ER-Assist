@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
-import {Button, View, Wizard} from 'react-native-ui-lib';
+import {Button, View, Wizard, Colors} from 'react-native-ui-lib';
 
 const CustomWizard = props => {
   const [wizardState, setWizardState] = useState({
@@ -55,9 +55,9 @@ const CustomWizard = props => {
   const renderPrevButton = () => {
     return (
       <Button
+        outline
         text70
-        white
-        background-blue40
+        outlineColor={Colors.blue40}
         label={'Back'}
         marginT-10
         onPress={goToPrevStep}
@@ -71,8 +71,9 @@ const CustomWizard = props => {
 
     return (
       <Button
+        outline={activeIndex !== props.steps.length - 1}
         text70
-        white
+        // outlineColor={Colors.blue40}
         background-green30={activeIndex === props.steps.length - 1}
         label={label}
         marginT-10
