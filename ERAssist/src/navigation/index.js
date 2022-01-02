@@ -1,7 +1,9 @@
+import React from 'react';
 import {mainRoot} from './main-root';
 import {authRoot} from './auth-root';
 import {Navigation} from 'react-native-navigation';
 import {withNavigationProvider} from 'react-native-navigation-hooks';
+import {Provider} from 'react-redux';
 import {
   HomeScreen,
   LoginScreen,
@@ -12,47 +14,53 @@ import {
   Drawer,
 } from '../screens';
 
-const registerScreens = () => {
+const WrapScreen = (ReduxScreen, store) => props =>
+  (
+    <Provider store={store}>
+      <ReduxScreen {...props} />
+    </Provider>
+  );
+const registerScreens = store => {
   //=========================HomeScreen======================//
   Navigation.registerComponent(
     'com.erAssist.main.home',
-    () => withNavigationProvider(HomeScreen),
+    () => withNavigationProvider(WrapScreen(HomeScreen, store)),
     () => HomeScreen,
   );
   //=========================LoginScreen======================//
   Navigation.registerComponent(
     'com.erAssist.auth.login',
-    () => withNavigationProvider(LoginScreen),
+    () => withNavigationProvider(WrapScreen(LoginScreen, store)),
     () => LoginScreen,
   );
   //=========================SignupScreen======================//
   Navigation.registerComponent(
     'com.erAssist.auth.signup',
-    () => withNavigationProvider(SignupScreen),
+    () => withNavigationProvider(WrapScreen(SignupScreen, store)),
     () => SignupScreen,
   );
   //=========================FormsScreen======================//
   Navigation.registerComponent(
     'com.erAssist.main.forms',
-    () => withNavigationProvider(FormsScreen),
+    () => withNavigationProvider(WrapScreen(FormsScreen, store)),
     () => FormsScreen,
   );
   //=========================ReportsScreen======================//
   Navigation.registerComponent(
     'com.erAssist.main.reports',
-    () => withNavigationProvider(ReportsScreen),
+    () => withNavigationProvider(WrapScreen(ReportsScreen, store)),
     () => ReportsScreen,
   );
   //=========================ManageScreen======================//
   Navigation.registerComponent(
     'com.erAssist.main.manage',
-    () => withNavigationProvider(ManageScreen),
+    () => withNavigationProvider(WrapScreen(ManageScreen, store)),
     () => ManageScreen,
   );
   //=========================Drawer======================//
   Navigation.registerComponent(
     'com.erAssist.main.drawer',
-    () => withNavigationProvider(Drawer),
+    () => withNavigationProvider(WrapScreen(Drawer, store)),
     () => Drawer,
   );
 };
