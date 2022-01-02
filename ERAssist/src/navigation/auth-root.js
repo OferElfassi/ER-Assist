@@ -12,6 +12,9 @@ export const authRoot = {
               },
             ],
             options: {
+              topBar: {
+                visible: false,
+              },
               bottomTab: {
                 text: 'Login',
               },
@@ -28,6 +31,9 @@ export const authRoot = {
               },
             ],
             options: {
+              topBar: {
+                visible: false,
+              },
               bottomTab: {
                 text: 'Signup',
               },
