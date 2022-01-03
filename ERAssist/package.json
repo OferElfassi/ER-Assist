@@ -6,6 +6,7 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start --reset-cache",
+    "reverse": "adb -s R58M3052Q5W reverse tcp:8081 tcp:8081",
     "test": "jest",
     "lint": "eslint ."
   },
@@ -23,6 +24,7 @@
     "react-native-vector-icons": "^9.0.0",
     "react-redux": "^7.2.6",
     "redux": "^4.1.2",
+    "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.1"
   },
   "devDependencies": {

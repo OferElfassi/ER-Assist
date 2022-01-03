@@ -1,8 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {StyleSheet, ScrollView} from 'react-native';
 import {setMainRoot} from '../navigation';
 import {
-  TextField,
   Button,
   View,
   Text,
@@ -11,11 +10,16 @@ import {
   RadioButton,
   RadioGroup,
   Picker,
+  Incubator,
   Image,
+  Colors,
 } from 'react-native-ui-lib';
 import CustomWizard from '../components/CustomWizard/CustomWizard';
 import CustomRadio from '../components/CustomRadio/CustomRadio';
 import CustomPicker from '../components/CustomPicker/CustomPicker';
+import {useUi, useUser} from '../hooks';
+const {TextField} = Incubator;
+import Loader from '../components/Loader/Loader';
 
 /**
  * username
@@ -35,8 +39,8 @@ const options = [
 ];
 
 const roleOptions = [
-  {value: 0, label: 'Reporter'},
-  {value: 1, label: 'Manager'},
+  {value: 'reporter', label: 'Reporter'},
+  {value: 'manager', label: 'Manager'},
 ];
 
 const organizationOptions = [
@@ -47,28 +51,147 @@ const organizationOptions = [
 
 const roles = ['Reporter', 'Manager'];
 
+const initialSignupInfoState = {
+  fullName: '',
+  email: '',
+  password: '',
+  confirm_password: '',
+  address: '',
+  phone: '',
+  organization: '',
+  isManager: false,
+};
+const initialSignupValidState = {
+  fullName: false,
+  email: false,
+  password: false,
+  confirm_password: false,
+  address: '',
+  phone: false,
+  organization: false,
+  isManager: true,
+};
+
 const SignupScreen = () => {
-  const [selectedRoleIndex, setSelectedRoleIndex] = useState(0);
+  const {uiState, uiActions} = useUi();
+  const {userState, userActions} = useUser();
+  const [signupInfo, setSignupInfo] = useState(initialSignupInfoState);
+  const [signupValidity, setSignupValidity] = useState(initialSignupValidState);
+
+  useEffect(() => {
+    console.log('kkk', uiState);
+  });
+
+  const handleChange = inputName => {
+    return val => {
+      setSignupInfo(prevState => ({
+        ...prevState,
+        [inputName]: val,
+      }));
+    };
+  };
+  const handleValidityChange = inputName => {
+    return isValid => {
+      setSignupValidity(prevState => ({
+        ...prevState,
+        [inputName]: isValid,
+      }));
+    };
+  };
+
+  const resetField = fieldName => {
+    if (fieldName) {
+      setSignupInfo(prevState => ({
+        ...prevState,
+        [fieldName]: initialSignupInfoState[fieldName],
+      }));
+    }
+  };
+
+  const resetAllFields = () => {
+    setSignupInfo({...initialSignupInfoState});
+  };
+
+  const handleSignupSubmit = () => {
+    console.log(signupInfo, signupValidity);
+  };
 
   const personalInfoForm = () => {
     return (
-      <View style={styles.formContainer}>
-        <TextField text60 placeholder="Full Name" grey10 />
-        <TextField text60 placeholder="Email" grey10 />
-        <TextField text60 placeholder="Address" grey10 />
-        <TextField text60 placeholder="Phone" grey10 />
+      <View style={styles.formContainer} marginT-30>
+        {/*<Loader />*/}
+        <TextField
+          text60
+          floatingPlaceholder
+          placeholder="Full Name"
+          enableErrors
+          onChangeText={handleChange('fullName')}
+          value={signupInfo.fullName}
+          validate={['required']}
+          validationMessage="This field is required"
+          validateOnBlur
+          fieldStyle={styles.withUnderline}
+          onChangeValidity={handleValidityChange('fullName')}
+          grey10
+        />
+        <TextField
+          text60
+          floatingPlaceholder
+          placeholder="Email"
+          enableErrors
+          onChangeText={handleChange('email')}
+          value={signupInfo.email}
+          validate={['required', 'email']}
+          validationMessage="Email is invalid"
+          onChangeValidity={handleValidityChange('email')}
+          validateOnBlur
+          grey10
+          fieldStyle={styles.withUnderline}
+        />
+        <TextField
+          text60
+          floatingPlaceholder
+          placeholder="Address"
+          enableErrors
+          onChangeText={handleChange('address')}
+          value={signupInfo.address}
+          validate={['required']}
+          validationMessage="This field is required"
+          validateOnChange
+          onChangeValidity={handleValidityChange('address')}
+          grey10
+          fieldStyle={styles.withUnderline}
+        />
+        <TextField
+          text60
+          floatingPlaceholder
+          placeholder="Phone"
+          enableErrors
+          onChangeText={handleChange('phone')}
+          value={signupInfo.phone}
+          validate={['required']}
+          validationMessage="This field is required"
+          validateOnChange
+          onChangeValidity={handleValidityChange('phone')}
+          grey10
+          fieldStyle={styles.withUnderline}
+        />
       </View>
     );
   };
 
-  const renderRolesRadioButton = roleIndex => {
-    const value = roles[roleIndex];
-    return (
-      <RadioButton marginL-10={roleIndex > 0} value={roleIndex} label={value} />
-    );
+  const onRoleChange = role => {
+    const setRoleFunc = handleChange('isManager');
+    setRoleFunc(role === 'manager');
   };
-  const onRoleChange = role => {};
-  const onOrganizationChange = organization => {};
+
+  const onOrganizationChange = organization => {
+    const setOrganizationValidFunc = handleValidityChange('organization');
+    const setOrganizationFunc = handleChange('organization');
+    setOrganizationFunc(organization);
+    setOrganizationValidFunc(true);
+  };
+
   const organizationInfoForm = () => {
     return (
       <View style={styles.formContainer}>
@@ -81,24 +204,28 @@ const SignupScreen = () => {
         />
         <CustomPicker
           options={organizationOptions}
-          title={'Choose Organization'}
+          title="Choose Organization"
           onChange={onOrganizationChange}
         />
-        <View style={[styles.formContainer, {opacity: 0.3}]}>
+        <View
+          style={[
+            styles.formContainer,
+            {opacity: signupInfo.isManager ? 1 : 0.3},
+          ]}>
           <Text marginB-20 text60 grey10>
             Add Organization
           </Text>
           <TextField
-            editable={false}
+            editable={signupInfo.isManager}
             text80
+            enableErrors
             placeholder="Organization Name"
+            onChangeText={handleChange('organization')}
+            value={signupInfo.isManager ? signupInfo.organization : ''}
+            onChangeValidity={handleValidityChange('organization')}
             grey10
-          />
-          <TextField
-            text80
-            placeholder="Organization Address"
-            grey10
-            editable={false}
+            validateOnChange
+            fieldStyle={styles.withUnderline}
           />
         </View>
       </View>
@@ -108,12 +235,40 @@ const SignupScreen = () => {
   const setPasswordForm = () => {
     return (
       <View style={styles.formContainer}>
-        <TextField text60 placeholder="Password" secureTextEntry grey10 />
         <TextField
           text60
+          floatingPlaceholder
+          placeholder="Password"
+          secureTextEntry
+          grey10
+          enableErrors
+          validateOnChange
+          onChangeText={handleChange('password')}
+          onChangeValidity={handleValidityChange('password')}
+          value={signupInfo.password}
+          validate={['required']}
+          validationMessage="This field is required"
+          fieldStyle={styles.withUnderline}
+        />
+        <TextField
+          text60
+          floatingPlaceholder
           placeholder="Confirm password"
           secureTextEntry
           grey10
+          enableErrors
+          onChangeText={handleChange('confirm_password')}
+          value={signupInfo.confirm_password}
+          fieldStyle={styles.withUnderline}
+          validate={[
+            'required',
+            () => {
+              return signupInfo.password === signupInfo.confirm_password;
+            },
+          ]}
+          validateOnChange
+          onChangeValidity={handleValidityChange('confirm_password')}
+          validationMessage={['This field is required', 'Passwords not match']}
         />
       </View>
     );
@@ -137,7 +292,7 @@ const SignupScreen = () => {
           {component: setPasswordForm(), title: 'Set Password'},
         ]}
         finishBtnText={'Done & Signup'}
-        onFinish={() => {}}
+        onFinish={handleSignupSubmit}
       />
     </View>
   );
@@ -159,14 +314,11 @@ const styles = StyleSheet.create({
     // width: '70%',
     // borderWidth: 2,
   },
-  stepsBar: {
-    marginTop: 30,
-  },
-  stepContainer: {
-    flex: 1,
-    justifyContent: 'space-around',
-    margin: 30,
-    width: '70%',
+  withUnderline: {
+    borderBottomWidth: 1,
+    borderColor: Colors.grey40,
+    paddingBottom: 4,
+    marginBottom: 30,
   },
 });
 

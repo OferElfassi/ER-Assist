@@ -6,7 +6,7 @@ import {Navigation} from 'react-native-navigation';
 import {setAuthRoot, setMainRoot, registerScreens} from './src/navigation';
 import {loadColorsSettings, loadColorScheme} from './src/theam/colors';
 import initStore from './src/store/store';
-
+const store = initStore();
 loadColorsSettings();
 loadColorScheme('light');
 
@@ -15,7 +15,6 @@ const isUserLoggedIn = () => {
 };
 
 Navigation.events().registerAppLaunchedListener(() => {
-  const store = initStore();
   registerScreens(store);
   if (isUserLoggedIn()) {
     setMainRoot();

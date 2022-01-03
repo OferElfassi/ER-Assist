@@ -1,9 +1,41 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet} from 'react-native';
 import {setMainRoot} from '../navigation';
-import {TextField, Button, View, Text, Image} from 'react-native-ui-lib';
+import {
+  Button,
+  View,
+  Text,
+  Image,
+  Typography,
+  Colors,
+  Incubator,
+} from 'react-native-ui-lib';
+import {useUser} from '../hooks';
 
+const {TextField} = Incubator;
+const initialLoginState = {email: '', password: ''};
 const LoginScreen = () => {
+  const [loginInfo, setLoginInfo] = useState(initialLoginState);
+
+  const {userActions, userState} = useUser();
+
+  const handleChange = inputName => {
+    return val => {
+      setLoginInfo(prevState => ({
+        ...prevState,
+        [inputName]: val,
+      }));
+    };
+  };
+
+  const test = val => {
+    console.log('val', val);
+  };
+  const handleLoginPress = () => {
+    console.log(loginInfo);
+    // userActions.login(loginInfo);
+  };
+
   return (
     <View style={styles.root}>
       <Image
@@ -14,15 +46,40 @@ const LoginScreen = () => {
         <Text blue50 text20 center marginB-20>
           Login
         </Text>
-        <TextField text50 placeholder="username" grey10 />
-        <TextField text50 placeholder="password" secureTextEntry grey10 />
+        <TextField
+          text50
+          enableErrors
+          floatingPlaceholder
+          placeholder="Email"
+          onChangeText={handleChange('email')}
+          value={loginInfo.email}
+          validate={['required', 'email']}
+          validationMessage={['This field is required', 'Invalid email']}
+          validateOnBlur
+          fieldStyle={styles.withUnderline}
+          grey10
+          keyboardType={'email-address'}
+        />
+        <TextField
+          text50
+          floatingPlaceholder
+          placeholder="password"
+          onChangeText={handleChange('password')}
+          value={loginInfo.password}
+          validate={['required']}
+          validationMessage="This field is required"
+          validateOnBlur
+          secureTextEntry
+          fieldStyle={styles.withUnderline}
+          grey10
+        />
         <View marginT-20 center>
           <Button
             text70
             white
             background-orange30
             label="Login"
-            onPress={() => setMainRoot()}
+            onPress={handleLoginPress}
           />
         </View>
       </View>
@@ -44,6 +101,11 @@ const styles = StyleSheet.create({
   },
   formContainer: {
     width: '70%',
+  },
+  withUnderline: {
+    borderBottomWidth: 1,
+    borderColor: Colors.grey40,
+    paddingBottom: 4,
   },
 });
 

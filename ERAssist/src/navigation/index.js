@@ -4,6 +4,8 @@ import {authRoot} from './auth-root';
 import {Navigation} from 'react-native-navigation';
 import {withNavigationProvider} from 'react-native-navigation-hooks';
 import {Provider} from 'react-redux';
+import Loader from '../components/Loader/Loader';
+import CustomModal from '../components/CustomModal/CustomModal';
 import {
   HomeScreen,
   LoginScreen,
@@ -18,6 +20,8 @@ const WrapScreen = (ReduxScreen, store) => props =>
   (
     <Provider store={store}>
       <ReduxScreen {...props} />
+      <Loader {...props} />
+      <CustomModal {...props} />
     </Provider>
   );
 const registerScreens = store => {

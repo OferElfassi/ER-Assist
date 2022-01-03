@@ -8,15 +8,25 @@ export default function useUser() {
   const values = useSelector(store => store.user);
   const dispatch = useDispatch();
 
-  const setUserData = userData => {
-    dispatch(userActions.setUserData(userData));
+  const login = ({email, password}) => {
+    dispatch(userActions.login({email, password}));
+  };
+
+  const signup = (/**userState*/ signupInfo) => {
+    dispatch(userActions.signup(signupInfo));
+  };
+
+  const handleLogOut = () => {
+    dispatch(userActions.handleLogOut());
   };
 
   return {
     /** @type {userState} */
     userState: values,
     userActions: {
-      setUserData: useCallback(setUserData, []),
+      login: useCallback(login, []),
+      signup: useCallback(signup, []),
+      handleLogOut: useCallback(handleLogOut, []),
     },
   };
 }

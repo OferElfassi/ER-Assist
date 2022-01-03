@@ -8,15 +8,20 @@ export default function useUi() {
   const values = useSelector(store => store.ui);
   const dispatch = useDispatch();
 
-  const toggleLoader = state => {
-    dispatch(uiActions.toggleLoader(state));
+  const toggleLoaderIndicator = state => {
+    dispatch(uiActions.toggleLoaderIndicator(state));
+  };
+
+  const setErrorMessage = msg => {
+    dispatch(uiActions.setErrorMessage(msg));
   };
 
   return {
     /** @type {uiState} */
-    userState: values,
-    userActions: {
-      toggleLoader: useCallback(toggleLoader, []),
+    uiState: values,
+    uiActions: {
+      toggleLoaderIndicator: useCallback(toggleLoaderIndicator, []),
+      setErrorMessage: useCallback(setErrorMessage, []),
     },
   };
 }
