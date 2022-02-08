@@ -6,6 +6,7 @@ import {withNavigationProvider} from 'react-native-navigation-hooks';
 import {Provider} from 'react-redux';
 import Loader from '../components/Loader/Loader';
 import CustomModal from '../components/CustomModal/CustomModal';
+import Header from './Header';
 import {
   HomeScreen,
   LoginScreen,
@@ -14,6 +15,7 @@ import {
   FormsScreen,
   ManageScreen,
   Drawer,
+  TestScreen,
 } from '../screens';
 
 const WrapScreen = (ReduxScreen, store) => props =>
@@ -66,6 +68,18 @@ const registerScreens = store => {
     'com.erAssist.main.drawer',
     () => withNavigationProvider(WrapScreen(Drawer, store)),
     () => Drawer,
+  );
+  //=========================Header======================//
+  Navigation.registerComponent(
+    'com.erAssist.main.header',
+    () => withNavigationProvider(WrapScreen(Header, store)),
+    () => Header,
+  );
+  //=========================TestScreen======================//
+  Navigation.registerComponent(
+    'com.erAssist.main.test',
+    () => withNavigationProvider(WrapScreen(TestScreen, store)),
+    () => TestScreen,
   );
 };
 

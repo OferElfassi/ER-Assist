@@ -21,7 +21,10 @@ import * as actionTypes from '../actionTypes';
  @property {string} userId
  @property {string} address
  @property {string} phone
+ @property {string} gender
+ @property {string} role
  @property {boolean} isManager
+ @property {boolean} isDoctor
  */
 
 /**
@@ -39,7 +42,10 @@ const initialState = {
     userId: '',
     address: '',
     phone: '',
+    gender: 'male',
+    role: 'reporter',
     isManager: false,
+    isDoctor: false,
   },
 };
 

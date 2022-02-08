@@ -21,6 +21,8 @@ export const loadColorsSettings = () => {
   Colors.loadColors({
     pink: '#FF69B4',
     gold: '#FFD700',
+    darkBlue: '#263260',
+    danger: '#dc6f1f',
   });
 
   Typography.loadTypographies({
@@ -29,6 +31,7 @@ export const loadColorsSettings = () => {
     h3: {fontSize: 34, fontWeight: '300', lineHeight: 48},
     h4: {fontSize: 22, fontWeight: '300', lineHeight: 32},
     h5: {fontSize: 12, fontWeight: '300', lineHeight: 16},
+    b1: {fontSize: 22, fontWeight: '700', letterSpacing: 4, lineHeight: 32},
   });
 
   Spacings.loadSpacings({

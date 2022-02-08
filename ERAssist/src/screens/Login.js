@@ -14,10 +14,17 @@ import {useUser} from '../hooks';
 
 const {TextField} = Incubator;
 const initialLoginState = {email: '', password: ''};
+const loginValidityState = {email: false, password: false};
 const LoginScreen = () => {
   const [loginInfo, setLoginInfo] = useState(initialLoginState);
+  const [loginValidity, setLoginValidity] = useState(loginValidityState);
 
   const {userActions, userState} = useUser();
+
+  const resetAllFields = () => {
+    setLoginInfo({...initialLoginState});
+    setLoginValidity({...loginValidityState});
+  };
 
   const handleChange = inputName => {
     return val => {
@@ -28,12 +35,21 @@ const LoginScreen = () => {
     };
   };
 
-  const test = val => {
-    console.log('val', val);
+  const handleValidityChange = inputName => {
+    return isValid => {
+      setLoginValidity(prevState => ({
+        ...prevState,
+        [inputName]: isValid,
+      }));
+    };
   };
+
   const handleLoginPress = () => {
     console.log(loginInfo);
-    // userActions.login(loginInfo);
+    console.log(loginValidity);
+
+    // if(!loginValidity.password || !loginValidity.email)
+    userActions.login(loginInfo);
   };
 
   return (
@@ -55,10 +71,11 @@ const LoginScreen = () => {
           value={loginInfo.email}
           validate={['required', 'email']}
           validationMessage={['This field is required', 'Invalid email']}
-          validateOnBlur
+          validateOnChange
           fieldStyle={styles.withUnderline}
           grey10
           keyboardType={'email-address'}
+          onChangeValidity={handleValidityChange('email')}
         />
         <TextField
           text50
@@ -68,9 +85,10 @@ const LoginScreen = () => {
           value={loginInfo.password}
           validate={['required']}
           validationMessage="This field is required"
-          validateOnBlur
+          validateOnChange
           secureTextEntry
           fieldStyle={styles.withUnderline}
+          onChangeValidity={handleValidityChange('password')}
           grey10
         />
         <View marginT-20 center>
@@ -80,6 +98,7 @@ const LoginScreen = () => {
             background-orange30
             label="Login"
             onPress={handleLoginPress}
+            disabled={!(loginInfo.password !== '' && loginValidity.email)}
           />
         </View>
       </View>

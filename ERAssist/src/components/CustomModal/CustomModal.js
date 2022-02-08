@@ -21,14 +21,6 @@ const CustomModal = props => {
             {modalText}
           </Text>
           <View style={styles.btnContainer}>
-            <Button
-              onPress={onOk}
-              label={okText}
-              isGlow
-              outline
-              outlineColor={'#7dac71'}
-              style={cancelText !== '' ? {marginRight: pixelScale(20)} : null}
-            />
             {cancelText !== '' && (
               <Button
                 onPress={onCancel}
@@ -37,6 +29,14 @@ const CustomModal = props => {
                 outlineColor={'#bc4a4a'}
               />
             )}
+            <Button
+              onPress={onOk}
+              label={okText}
+              isGlow
+              outline
+              outlineColor={'#7dac71'}
+              style={cancelText !== '' ? {marginLeft: pixelScale(20)} : null}
+            />
           </View>
         </View>
       </View>
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   modalView: {
     zIndex: 1000,
     margin: pixelScale(20),
-    backgroundColor: 'rgba(207,205,205,0.9)',
+    backgroundColor: 'rgb(245,245,245)',
     borderColor: '#000000',
     borderWidth: 1,
     borderRadius: 20,

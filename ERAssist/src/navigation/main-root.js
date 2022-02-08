@@ -14,6 +14,27 @@ export const mainRoot = {
             {
               component: {
                 name: 'com.erAssist.main.home',
+                options: {
+                  topBar: {
+                    hideOnScroll: true,
+                    leftButtons: [
+                      {
+                        id: 'buttonOne',
+                        icon: require('../assets/images/hamburger.png'),
+                      },
+                    ],
+
+                    background: {
+                      component: {
+                        name: 'com.erAssist.main.header',
+                        passProps: {title: 'Home'},
+                      },
+                    },
+                    drawBehind: false,
+                    visible: true,
+                    animate: true,
+                  },
+                },
               },
             },
           ],

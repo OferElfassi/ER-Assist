@@ -1,6 +1,6 @@
 import React from 'react';
-import {StyleSheet, FlatList} from 'react-native';
-import {Text, View, Button, Colors} from 'react-native-ui-lib';
+import {FlatList, StyleSheet} from 'react-native';
+import {Button, Colors, Text, View} from 'react-native-ui-lib';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 const reports = [
@@ -14,7 +14,7 @@ const reports = [
     treatment: [{action: '', timeStamp: ''}],
   },
   {
-    id: '123',
+    id: '12s3',
     date: '20/02/21 16:20',
     patient: {name: 'Yoram Schwartz', id: '87654321'},
     reporter: 'Mali Levi',
@@ -23,7 +23,7 @@ const reports = [
     treatment: [{action: '', timeStamp: ''}],
   },
   {
-    id: '123',
+    id: '12d3',
     date: '20/02/21 16:20',
     patient: {name: 'Yoram Schwartz', id: '87654321'},
     reporter: 'Mali Levi',
@@ -32,7 +32,7 @@ const reports = [
     treatment: [{action: '', timeStamp: ''}],
   },
   {
-    id: '123',
+    id: 'f123',
     date: '20/02/21 16:20',
     patient: {name: 'Yoram Schwartz', id: '87654321'},
     reporter: 'Mali Levi',
@@ -41,7 +41,7 @@ const reports = [
     treatment: [{action: '', timeStamp: ''}],
   },
   {
-    id: '123',
+    id: 'g123',
     date: '20/02/21 16:20',
     patient: {name: 'Yoram Schwartz', id: '87654321'},
     reporter: 'Mali Levi',
@@ -51,35 +51,35 @@ const reports = [
   },
 ];
 
-const IconInCircle = ({
-  circleSize,
-  borderWidth = 2,
-  borderColor = 'black',
-  ...props
-}) => (
-  <CircleBorder
-    size={circleSize}
-    borderWidth={borderWidth}
-    borderColor={borderColor}>
-    <Icon {...props} />
-  </CircleBorder>
-);
-
-const CircleBorder = ({size, borderWidth, borderColor, children}) => (
-  <View
-    style={{
-      width: size,
-      height: size,
-      borderRadius: 0.5 * size,
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      borderColor,
-      borderWidth,
-    }}>
-    {children}
-  </View>
-);
+// const IconInCircle = ({
+//   circleSize,
+//   borderWidth = 2,
+//   borderColor = 'black',
+//   ...props
+// }) => (
+//   <CircleBorder
+//     size={circleSize}
+//     borderWidth={borderWidth}
+//     borderColor={borderColor}>
+//     <Icon {...props} />
+//   </CircleBorder>
+// );
+//
+// const CircleBorder = ({size, borderWidth, borderColor, children}) => (
+//   <View
+//     style={{
+//       width: size,
+//       height: size,
+//       borderRadius: 0.5 * size,
+//       display: 'flex',
+//       justifyContent: 'center',
+//       alignItems: 'center',
+//       borderColor,
+//       borderWidth,
+//     }}>
+//     {children}
+//   </View>
+// );
 const HomeScreen = props => {
   return (
     <View style={styles.root} flex-1>
@@ -141,27 +141,28 @@ const HomeScreen = props => {
     </View>
   );
 };
-HomeScreen.options = {
-  topBar: {
-    hideOnScroll: true,
-    title: {
-      text: 'Home',
-      color: 'white',
-    },
-    leftButtons: [
-      {
-        id: 'buttonOne',
-        icon: require('../assets/images/hamburger.png'),
-      },
-    ],
-    background: {
-      color: '#2E8BFB',
-    },
-    drawBehind: false,
-    visible: true,
-    animate: true,
-  },
-};
+// HomeScreen.options = {
+//   topBar: {
+//     hideOnScroll: true,
+//     title: {
+//       text: 'Home',
+//       color: 'white',
+//     },
+//     leftButtons: [
+//       {
+//         id: 'buttonOne',
+//         icon: require('../assets/images/hamburger.png'),
+//       },
+//     ],
+//
+//     background: {
+//       component: {name: 'com.erAssist.main.header', passProps: {title: 'Home'}},
+//     },
+//     drawBehind: false,
+//     visible: true,
+//     animate: true,
+//   },
+// };
 
 const styles = StyleSheet.create({
   root: {

@@ -21,7 +21,7 @@ const CustomPicker = props => {
 
   const onValueChange = val => {
     setSelectedOption(val);
-    // props.onChange(val);
+    props.onChange(val);
   };
 
   return (

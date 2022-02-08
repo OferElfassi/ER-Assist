@@ -5,6 +5,7 @@ import ReportsScreen from './Reports';
 import FormsScreen from './Forms';
 import ManageScreen from './Manage';
 import Drawer from './Drawer';
+import TestScreen from './TestScreen';
 
 export {
   HomeScreen,
@@ -14,4 +15,5 @@ export {
   FormsScreen,
   ManageScreen,
   Drawer,
+  TestScreen,
 };

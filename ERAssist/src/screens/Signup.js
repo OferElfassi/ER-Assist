@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useEffect} from 'react';
 import {StyleSheet, ScrollView} from 'react-native';
 import {setMainRoot} from '../navigation';
@@ -17,7 +18,8 @@ import {
 import CustomWizard from '../components/CustomWizard/CustomWizard';
 import CustomRadio from '../components/CustomRadio/CustomRadio';
 import CustomPicker from '../components/CustomPicker/CustomPicker';
-import {useUi, useUser} from '../hooks';
+import {useUi, useUser, useData} from '../hooks';
+
 const {TextField} = Incubator;
 import Loader from '../components/Loader/Loader';
 
@@ -66,7 +68,7 @@ const initialSignupValidState = {
   email: false,
   password: false,
   confirm_password: false,
-  address: '',
+  address: false,
   phone: false,
   organization: false,
   isManager: true,
@@ -75,12 +77,14 @@ const initialSignupValidState = {
 const SignupScreen = () => {
   const {uiState, uiActions} = useUi();
   const {userState, userActions} = useUser();
+  const {dataState, dataActions} = useData();
   const [signupInfo, setSignupInfo] = useState(initialSignupInfoState);
   const [signupValidity, setSignupValidity] = useState(initialSignupValidState);
 
   useEffect(() => {
-    console.log('kkk', uiState);
-  });
+    dataActions.getOrganizations();
+    console.log(dataState);
+  }, []);
 
   const handleChange = inputName => {
     return val => {
@@ -98,6 +102,20 @@ const SignupScreen = () => {
       }));
     };
   };
+  const isFormValid = () => {
+    const {email, confirm_password, organization, isManager} = signupValidity;
+    const {fullName, password, address, phone} = signupInfo;
+    return (
+      fullName !== '' &&
+      email &&
+      password !== '' &&
+      confirm_password &&
+      address !== '' &&
+      phone !== '' &&
+      organization &&
+      isManager
+    );
+  };
 
   const resetField = fieldName => {
     if (fieldName) {
@@ -110,6 +128,7 @@ const SignupScreen = () => {
 
   const resetAllFields = () => {
     setSignupInfo({...initialSignupInfoState});
+    setSignupValidity({...initialSignupValidState});
   };
 
   const handleSignupSubmit = () => {
@@ -203,7 +222,10 @@ const SignupScreen = () => {
           marginT-15
         />
         <CustomPicker
-          options={organizationOptions}
+          options={dataState.organizations.map(org => ({
+            label: org.name,
+            value: org.name,
+          }))}
           title="Choose Organization"
           onChange={onOrganizationChange}
         />
@@ -263,7 +285,7 @@ const SignupScreen = () => {
           validate={[
             'required',
             () => {
-              return signupInfo.password === signupInfo.confirm_password;
+              return signupInfo.password !== signupInfo.confirm_password;
             },
           ]}
           validateOnChange
@@ -292,6 +314,7 @@ const SignupScreen = () => {
           {component: setPasswordForm(), title: 'Set Password'},
         ]}
         finishBtnText={'Done & Signup'}
+        finishBtnDisabled={!isFormValid()}
         onFinish={handleSignupSubmit}
       />
     </View>

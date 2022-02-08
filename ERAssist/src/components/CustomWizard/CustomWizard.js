@@ -80,7 +80,11 @@ const CustomWizard = props => {
         onPress={
           activeIndex === props.steps.length - 1 ? props.onFinish : goToNextStep
         }
-        disabled={disabled}
+        disabled={
+          activeIndex === props.steps.length - 1
+            ? props.finishBtnDisabled
+            : false
+        }
       />
     );
   };
@@ -139,6 +143,7 @@ CustomWizard.propTypes = {
   ),
   onFinish: PropTypes.func,
   finishBtnText: PropTypes.string,
+  finishBtnDisabled: PropTypes.bool,
 };
 
 const styles = StyleSheet.create({

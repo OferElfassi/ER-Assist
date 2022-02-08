@@ -1,7 +1,7 @@
 import {applyMiddleware, combineReducers, compose, createStore} from 'redux';
 import thunk from 'redux-thunk';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {uiReducer, userReducer} from './reducers';
+import {uiReducer, userReducer, dataReducer} from './reducers';
 import {persistStore, persistReducer} from 'redux-persist';
 import {setMainRoot, setAuthRoot} from '../navigation';
 
@@ -15,6 +15,7 @@ const initStore = () => {
   const reducers = {
     ui: uiReducer,
     user: userReducer,
+    data: dataReducer,
   };
   const middleware = [applyMiddleware(...[thunk])];
 
@@ -27,10 +28,11 @@ const initStore = () => {
   persistStore(store, null, () => {
     console.log('newstore', store.getState());
 
-    if (store.getState().user.isLoggedIn) {
+    if (!store.getState().user.isLoggedIn) {
       setMainRoot();
     } else {
-      setAuthRoot();
+      // setAuthRoot();
+      setMainRoot();
     }
   });
   return store;

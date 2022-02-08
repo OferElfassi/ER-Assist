@@ -36,7 +36,7 @@ export const login = ({email, password}) => {
   };
 };
 
-export const signup = (/**userState*/ signupInfo) => {
+export const signup = (/**signupInfo*/ signupInfo) => {
   return async dispatch => {
     try {
       console.log({signupInfo});
@@ -53,8 +53,8 @@ export const handleLogOut = () => {
         uiActions.setModal({
           modalVisible: true,
           modalText: 'Do you want to log out?',
-          okText: 'ok',
-          cancelText: 'Cancel',
+          okText: 'Yes',
+          cancelText: 'No',
           onOk: () => {
             dispatch(uiActions.closeModal());
             dispatch(logout());

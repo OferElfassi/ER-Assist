@@ -1,15 +1,14 @@
 import React, {useEffect} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Navigation} from 'react-native-navigation';
-
-const ManageScreen = props => {
+const TestScreen = props => {
   useEffect(() => {
     Navigation.mergeOptions(props.componentId, {
       topBar: {
         background: {
           component: {
             name: 'com.erAssist.main.header',
-            passProps: {title: 'Manage'},
+            passProps: {title: 'TestScreen'},
           },
         },
       },
@@ -31,4 +30,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ManageScreen;
+export default TestScreen;

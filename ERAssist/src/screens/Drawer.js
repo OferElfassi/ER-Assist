@@ -1,11 +1,16 @@
-import React, {useState, useEffect} from 'react';
-import {Alert, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import {setAuthRoot, setMainRoot} from '../navigation';
+import React, {useEffect, useState} from 'react';
+import {ImageBackground, StyleSheet} from 'react-native';
+import {setMainRoot} from '../navigation';
 import {Navigation} from 'react-native-navigation';
 import {useNavigationCommand} from 'react-native-navigation-hooks';
+import {useUser} from '../hooks';
+import {Text, View} from 'react-native-ui-lib';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import {getInitials} from '../util/getInitials';
 
 const Drawer = props => {
   const [activeScreen, setActiveScreen] = useState('home');
+  const {userActions, userState} = useUser();
   useNavigationCommand((commandName, {commandId, layout}) => {
     console.log(`Command ${commandName} (${commandId}) invoked`);
   });
@@ -13,34 +18,18 @@ const Drawer = props => {
     // Navigation.g;
   }, []);
 
-  const logoutAlert = () =>
-    Alert.alert(
-      'Logout',
-      'Are you sure ?',
-      [
-        {
-          text: 'Cancel',
-          onPress: () => console.log('Cancel Pressed'),
-          style: 'cancel',
-        },
-        {
-          text: 'Yes',
-          onPress: () => {
-            {
-              setAuthRoot();
-            }
-          },
-        },
-      ],
-      {cancelable: false},
-    );
-
   return (
-    <View style={styles.root}>
+    <ImageBackground
+      source={require('../assets/images/bg.jpg')}
+      resizeMode="cover"
+      style={styles.root}>
+      {/*<ImageBackground source={image} resizeMode="cover" style={styles.image}>*/}
+      {/*    */}
+      {/*</ImageBackground>*/}
       <View
         style={{
           height: '25%',
-          backgroundColor: '#2E8BFB',
+          backgroundColor: 'rgba(255,255,255,0.37)',
           justifyContent: 'center',
           alignItems: 'center',
           borderBottomColor: '#ddd',
@@ -48,10 +37,12 @@ const Drawer = props => {
         }}>
         <View
           style={{
-            height: 80,
-            width: 80,
+            height: 60,
+            width: 60,
             borderRadius: 40,
-            backgroundColor: '#fff',
+            borderWidth: 2,
+            borderColor: 'rgba(222,255,213,0.78)',
+            backgroundColor: 'rgba(218,224,255,0.42)',
             alignItems: 'center',
             justifyContent: 'center',
           }}>
@@ -61,95 +52,136 @@ const Drawer = props => {
               fontSize: 20,
               fontWeight: 'bold',
             }}>
-            RS
+            {getInitials(userState.userInfo.fullName)}
           </Text>
         </View>
         <Text
           style={{
-            color: 'white',
+            color: '#1b0455',
             fontSize: 20,
             fontWeight: 'bold',
           }}>
-          Rahul Singh
+          {userState.userInfo.fullName}
         </Text>
         <Text
           style={{
-            color: 'white',
+            color: '#1b0455',
             fontSize: 18,
           }}>
-          rahul.singh@gmail.com
+          {userState.userInfo.email}
         </Text>
       </View>
 
-      <TouchableOpacity
-        style={styles.navBtnTouchable}
-        onPress={() => {
-          setMainRoot();
-        }}>
-        <Text style={styles.navBtnText}>Home</Text>
-      </TouchableOpacity>
+      <View style={{height: '35%'}} spread>
+        <Icon.Button
+          size={25}
+          color={'black'}
+          name="home"
+          backgroundColor="transparent"
+          onPress={setMainRoot}>
+          <Text b1 darkBlue>
+            Home
+          </Text>
+        </Icon.Button>
 
-      <TouchableOpacity
-        style={styles.navBtnTouchable}
-        onPress={() => {
-          Navigation.mergeOptions(props.componentId, {
-            sideMenu: {
-              left: {
-                visible: false,
+        <Icon.Button
+          size={25}
+          color={'black'}
+          name="file-text-o"
+          backgroundColor="transparent"
+          onPress={() => {
+            Navigation.mergeOptions(props.componentId, {
+              sideMenu: {
+                left: {
+                  visible: false,
+                },
               },
-            },
-          });
-          Navigation.push('MainStack', {
-            component: {
-              name: 'com.erAssist.main.forms',
-            },
-          });
-        }}>
-        <Text style={styles.navBtnText}>Forms</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.navBtnTouchable}
-        onPress={() => {
-          Navigation.mergeOptions(props.componentId, {
-            sideMenu: {
-              left: {
-                visible: false,
+            });
+            Navigation.push('MainStack', {
+              component: {
+                name: 'com.erAssist.main.reports',
               },
-            },
-          });
-          Navigation.push('MainStack', {
-            component: {
-              name: 'com.erAssist.main.reports',
-            },
-          });
-        }}>
-        <Text style={styles.navBtnText}>Reports</Text>
-      </TouchableOpacity>
+            });
+          }}>
+          <Text b1 darkBlue>
+            Reports
+          </Text>
+        </Icon.Button>
 
-      <TouchableOpacity
-        style={styles.navBtnTouchable}
-        onPress={() => {
-          Navigation.mergeOptions(props.componentId, {
-            sideMenu: {
-              left: {
-                visible: false,
+        <Icon.Button
+          size={25}
+          color={'black'}
+          name="wrench"
+          backgroundColor="transparent"
+          onPress={() => {
+            Navigation.mergeOptions(props.componentId, {
+              sideMenu: {
+                left: {
+                  visible: false,
+                },
               },
-            },
-          });
-          Navigation.push('MainStack', {
-            component: {
-              name: 'com.erAssist.main.manage',
-            },
-          });
-        }}>
-        <Text style={styles.navBtnText}>Manage</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.navBtnTouchable} onPress={logoutAlert}>
-        <Text style={styles.navBtnText}>Logout</Text>
-      </TouchableOpacity>
-    </View>
+            });
+            Navigation.push('MainStack', {
+              component: {
+                name: 'com.erAssist.main.manage',
+              },
+            });
+          }}>
+          <Text b1 darkBlue>
+            Manage
+          </Text>
+        </Icon.Button>
+        {/*  ********************************  test screen **********************************************/}
+        <Icon.Button
+          size={25}
+          color={'black'}
+          name="wrench"
+          backgroundColor="transparent"
+          onPress={() => {
+            Navigation.mergeOptions(props.componentId, {
+              sideMenu: {
+                left: {
+                  visible: false,
+                },
+              },
+            });
+            Navigation.push('MainStack', {
+              component: {
+                name: 'com.erAssist.main.test',
+              },
+            });
+          }}>
+          <Text b1 darkBlue>
+            Test Screen
+          </Text>
+        </Icon.Button>
+        {/*  ********************************  test screen **********************************************/}
+        <Icon.Button
+          size={33}
+          color={'black'}
+          name="user"
+          backgroundColor="transparent"
+          onPress={setMainRoot}>
+          <Text b1 darkBlue>
+            Profile
+          </Text>
+        </Icon.Button>
+      </View>
+      <View absB marginB={25}>
+        <Icon.Button
+          iconStyle={{
+            transform: [{rotateY: '180deg'}],
+          }}
+          color={'black'}
+          name="sign-out"
+          backgroundColor="transparent"
+          onPress={userActions.handleLogOut}>
+          <Text b1 danger>
+            Logout
+          </Text>
+        </Icon.Button>
+      </View>
+    </ImageBackground>
   );
 };
 
