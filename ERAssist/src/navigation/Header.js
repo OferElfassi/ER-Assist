@@ -23,6 +23,7 @@ const Header = props => {
     });
   };
   const handleLogoClick = () => {
+    Navigation.popToRoot('MainStack');
     Navigation.mergeOptions('MainBottomTabsId', {
       bottomTabs: {
         currentTabId: 'MainStack',

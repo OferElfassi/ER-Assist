@@ -18,6 +18,7 @@ import {
   ReportsScreen,
   SignupScreen,
   TestScreen,
+  ReportScreen,
 } from '../screens';
 
 const WrapScreen = (ReduxScreen, store) => props =>
@@ -89,6 +90,7 @@ const applyBottomTabSelectedListener = () => {
         });
       } else {
         registerMiddleTabButton();
+        Navigation.popToRoot('MainStack');
       }
     },
   );
@@ -149,11 +151,11 @@ const registerScreens = store => {
     () => withNavigationProvider(WrapScreen(ReportGenerator, store)),
     () => ReportGenerator,
   );
-  //=========================ReportsScreen======================//
+  //=========================ReportScreen======================//
   Navigation.registerComponent(
-    'com.erAssist.main.reports',
-    () => withNavigationProvider(WrapScreen(ReportsScreen, store)),
-    () => ReportsScreen,
+    'com.erAssist.main.report',
+    () => withNavigationProvider(WrapScreen(ReportScreen, store)),
+    () => ReportScreen,
   );
   //=========================ManageScreen======================//
   Navigation.registerComponent(

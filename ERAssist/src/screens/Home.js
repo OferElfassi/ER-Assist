@@ -3,6 +3,8 @@ import {StyleSheet} from 'react-native';
 import {View} from 'react-native-ui-lib';
 import ScreenHeader from '../navigation/ScreenHeader';
 import CustomList from '../components/CustomList/CustomList';
+import CustomTabs from '../components/CustomTabs/CustomTabs';
+import {Navigation} from 'react-native-navigation';
 
 const reportItems = [
   {
@@ -13,6 +15,15 @@ const reportItems = [
     medicines: [{name: 'attent', amount: 30}],
     anamnesis: 'bala bla bla bla',
     treatment: [{action: 'pcr', timeStamp: '20/02/21 16:20'}],
+  },
+  {
+    id: '34',
+    timestamp: '15/03/21 16:20',
+    patient: {fullName: 'miri golan', id: '343535454'},
+    reporter: {fullName: 'Dekel Ben-David', id: '2434r54545d34'},
+    medicines: [{name: 'norofen', amount: 3}],
+    anamnesis: 'quick  treatment',
+    treatment: [{action: 'none', timeStamp: ''}],
   },
 ];
 const userItems = [
@@ -96,42 +107,53 @@ const userItems = [
 ];
 
 const HomeScreen = props => {
+  const handleUserClick = user => {};
+  const handleReportClickClick = report => {
+    Navigation.push('MainStack', {
+      component: {
+        name: 'com.erAssist.main.report',
+        passProps: {
+          report: report,
+        },
+      },
+    });
+  };
   return (
     <View style={styles.root} flex-1>
       <ScreenHeader pageTitle={'Home'} />
       <View style={styles.content}>
-        <CustomList
-          data={userItems}
-          onDeleteClick={() => {}}
-          onEditClick={() => {}}
-          onItemClick={() => {}}
+        <CustomTabs
+          items={[
+            {
+              label: 'Users',
+              key: 'Users',
+              component: (
+                <CustomList
+                  data={userItems}
+                  onDeleteClick={() => {}}
+                  onEditClick={() => {}}
+                  onItemClick={() => {}}
+                />
+              ),
+            },
+            {
+              label: 'Reports',
+              key: 'Reports',
+              component: (
+                <CustomList
+                  data={reportItems}
+                  onDeleteClick={() => {}}
+                  onEditClick={() => {}}
+                  onItemClick={handleReportClickClick}
+                />
+              ),
+            },
+          ]}
         />
       </View>
     </View>
   );
 };
-// HomeScreen.options = {
-//   topBar: {
-//     hideOnScroll: true,
-//     title: {
-//       text: 'Home',
-//       color: 'white',
-//     },
-//     leftButtons: [
-//       {
-//         id: 'buttonOne',
-//         icon: require('../assets/images/hamburger.png'),
-//       },
-//     ],
-//
-//     background: {
-//       component: {name: 'com.erAssist.main.header', passProps: {title: 'Home'}},
-//     },
-//     drawBehind: false,
-//     visible: true,
-//     animate: true,
-//   },
-// };
 
 const styles = StyleSheet.create({
   root: {

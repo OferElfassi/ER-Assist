@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 const {height, width} = Dimensions.get('window');
 const ScreenHeader = props => {
-  const {pageTitle} = props;
+  const {pageTitle, pageSubTitle} = props;
   return (
     <ImageBackground
       source={require('../assets/images/top_bg.png')}
@@ -14,12 +14,18 @@ const ScreenHeader = props => {
       <Text center style={styles.pageTitle}>
         {pageTitle}
       </Text>
+      {pageSubTitle && (
+        <Text center style={styles.pageSubTitle}>
+          {pageSubTitle}
+        </Text>
+      )}
     </ImageBackground>
   );
 };
 
 ScreenHeader.propTypes = {
   pageTitle: PropTypes.string,
+  pageSubTitle: PropTypes.string,
 };
 
 const styles = StyleSheet.create({
@@ -35,6 +41,14 @@ const styles = StyleSheet.create({
     fontSize: 22,
     letterSpacing: 4,
     top: 90,
+  },
+  pageSubTitle: {
+    width: '100%',
+    color: 'white',
+    position: 'absolute',
+    fontSize: 14,
+    letterSpacing: 3,
+    top: 125,
   },
 });
 
