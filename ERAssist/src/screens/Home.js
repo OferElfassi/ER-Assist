@@ -1,142 +1,111 @@
 import React from 'react';
-import {FlatList, StyleSheet} from 'react-native';
-import {Button, Colors, Text, View} from 'react-native-ui-lib';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import {StyleSheet} from 'react-native';
+import {View} from 'react-native-ui-lib';
+import ScreenHeader from '../navigation/ScreenHeader';
+import CustomList from '../components/CustomList/CustomList';
 
-const reports = [
-  {
-    id: '123',
-    date: '20/02/21 16:20',
-    patient: {name: 'Yoram Schwartz', id: '87654321'},
-    reporter: 'Mali Levi',
-    medicines: [{name: 'attent', amount: 30}],
-    anamnesis: 'bala bla bla bla',
-    treatment: [{action: '', timeStamp: ''}],
-  },
+const reportItems = [
   {
     id: '12s3',
-    date: '20/02/21 16:20',
-    patient: {name: 'Yoram Schwartz', id: '87654321'},
-    reporter: 'Mali Levi',
+    timestamp: '20/02/21 16:20',
+    patient: {fullName: 'Yoram Schwartz', id: '87654321'},
+    reporter: {fullName: 'Ofer Elfassi', id: '2434rd34'},
     medicines: [{name: 'attent', amount: 30}],
     anamnesis: 'bala bla bla bla',
-    treatment: [{action: '', timeStamp: ''}],
+    treatment: [{action: 'pcr', timeStamp: '20/02/21 16:20'}],
+  },
+];
+const userItems = [
+  {
+    fullName: 'Ofer Elfassi',
+    email: 'ofer221@hotmail.com',
+    userId: '2434rd34',
+    address: 'Tel-Aviv, Cordovero 15/1',
+    phone: '052252844',
+    gender: 'male',
+    role: 'reporter',
+    isManager: false,
+    isDoctor: false,
   },
   {
-    id: '12d3',
-    date: '20/02/21 16:20',
-    patient: {name: 'Yoram Schwartz', id: '87654321'},
-    reporter: 'Mali Levi',
-    medicines: [{name: 'attent', amount: 30}],
-    anamnesis: 'bala bla bla bla',
-    treatment: [{action: '', timeStamp: ''}],
+    fullName: 'Dekel BenDavid',
+    email: 'dekelb@gmail.com',
+    userId: '43534545',
+    address: 'Givataim, Herzel 15/1',
+    phone: '058647845',
+    gender: 'male',
+    role: 'doctor',
+    isManager: false,
+    isDoctor: true,
   },
   {
-    id: 'f123',
-    date: '20/02/21 16:20',
-    patient: {name: 'Yoram Schwartz', id: '87654321'},
-    reporter: 'Mali Levi',
-    medicines: [{name: 'attent', amount: 30}],
-    anamnesis: 'bala bla bla bla',
-    treatment: [{action: '', timeStamp: ''}],
+    fullName: 'Ofer Elfassi',
+    email: 'ofer221@hotmail.com',
+    userId: '2434rd34',
+    address: 'Tel-Aviv, Cordovero 15/1',
+    phone: '052252844',
+    gender: 'girl',
+    role: 'reporter',
+    isManager: false,
+    isDoctor: false,
   },
   {
-    id: 'g123',
-    date: '20/02/21 16:20',
-    patient: {name: 'Yoram Schwartz', id: '87654321'},
-    reporter: 'Mali Levi',
-    medicines: [{name: 'attent', amount: 30}],
-    anamnesis: 'bala bla bla bla',
-    treatment: [{action: '', timeStamp: ''}],
+    fullName: 'Dekel BenDavid',
+    email: 'dekelb@gmail.com',
+    userId: '43534545',
+    address: 'Givataim, Herzel 15/1',
+    phone: '058647845',
+    gender: 'girl',
+    role: 'doctor',
+    isManager: false,
+    isDoctor: true,
+  },
+  {
+    fullName: 'Dekel BenDavid',
+    email: 'dekelb@gmail.com',
+    userId: '43534545',
+    address: 'Givataim, Herzel 15/1',
+    phone: '058647845',
+    gender: 'male',
+    role: 'doctor',
+    isManager: false,
+    isDoctor: true,
+  },
+  {
+    fullName: 'Ofer Elfassi',
+    email: 'ofer221@hotmail.com',
+    userId: '2434rd34',
+    address: 'Tel-Aviv, Cordovero 15/1',
+    phone: '052252844',
+    gender: 'girl',
+    role: 'reporter',
+    isManager: false,
+    isDoctor: false,
+  },
+  {
+    fullName: 'Dekel BenDavid',
+    email: 'dekelb@gmail.com',
+    userId: '43534545',
+    address: 'Givataim, Herzel 15/1',
+    phone: '058647845',
+    gender: 'girl',
+    role: 'doctor',
+    isManager: false,
+    isDoctor: true,
   },
 ];
 
-// const IconInCircle = ({
-//   circleSize,
-//   borderWidth = 2,
-//   borderColor = 'black',
-//   ...props
-// }) => (
-//   <CircleBorder
-//     size={circleSize}
-//     borderWidth={borderWidth}
-//     borderColor={borderColor}>
-//     <Icon {...props} />
-//   </CircleBorder>
-// );
-//
-// const CircleBorder = ({size, borderWidth, borderColor, children}) => (
-//   <View
-//     style={{
-//       width: size,
-//       height: size,
-//       borderRadius: 0.5 * size,
-//       display: 'flex',
-//       justifyContent: 'center',
-//       alignItems: 'center',
-//       borderColor,
-//       borderWidth,
-//     }}>
-//     {children}
-//   </View>
-// );
 const HomeScreen = props => {
   return (
     <View style={styles.root} flex-1>
+      <ScreenHeader pageTitle={'Home'} />
       <View style={styles.content}>
-        <View flex-1 bg-screenBG>
-          <Button
-            outline
-            outlineColor={Colors.pink}
-            label="REPORT NOW"
-            borderRadius={0}
-            size={Button.sizes.medium}
-            text60
-            labelStyle={{fontWeight: '700', letterSpacing: 4}}
-            style={{borderWidth: 3, margin: 8}}
-          />
-          {/*<Text h1 pink>*/}
-          {/*  Hello World*/}
-          {/*</Text>*/}
-        </View>
-        <View style={styles.bottomContent}>
-          <View row spread>
-            <Text h4 pink>
-              Recent Reports
-            </Text>
-            <View row marginT-10>
-              <Text>Reports Page</Text>
-              <Icon
-                name="arrow-right"
-                backgroundColor="#3b5998"
-                style={{marginTop: 4, marginLeft: 1}}
-              />
-            </View>
-          </View>
-
-          <View style={styles.list}>
-            <FlatList
-              data={reports}
-              renderItem={({item}) => (
-                <View marginB-5 style={{borderWidth: 1, borderColor: 'black'}}>
-                  <View flex row spread>
-                    <View flex row>
-                      <Text>patient:</Text>
-                      <Text>{item.patient.name}</Text>
-                    </View>
-                    <View flex row>
-                      <Text>reporter:</Text>
-                      <Text>{item.patient.name}</Text>
-                    </View>
-                  </View>
-                  <View flex>
-                    <Text>{item.date}</Text>
-                  </View>
-                </View>
-              )}
-            />
-          </View>
-        </View>
+        <CustomList
+          data={userItems}
+          onDeleteClick={() => {}}
+          onEditClick={() => {}}
+          onItemClick={() => {}}
+        />
       </View>
     </View>
   );
@@ -166,19 +135,13 @@ const HomeScreen = props => {
 
 const styles = StyleSheet.create({
   root: {
-    flex: 1,
-    // alignItems: 'center',
+    flex: 1, // alignItems: 'center',
     // justifyContent: 'center',
-    backgroundColor: 'whitesmoke',
+    backgroundColor: 'whitesmoke', // backgroundColor: 'red',
   },
   content: {
-    paddingTop: 20,
-    // paddingLeft: 5,
-    paddingHorizontal: 10,
-    // backgroundColor: '#5eafee',
-    flex: 1,
-  },
-  topContent: {
+    paddingTop: 20, // paddingLeft: 5,
+    paddingHorizontal: 10, // backgroundColor: '#5eafee',
     flex: 1,
   },
   bottomContent: {
@@ -186,8 +149,7 @@ const styles = StyleSheet.create({
   },
   list: {
     flex: 1,
-    marginTop: 20,
-    // backgroundColor: '#aaccf6',
+    marginTop: 20, // backgroundColor: '#aaccf6',
   },
 });
 

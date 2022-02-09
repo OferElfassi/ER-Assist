@@ -7,7 +7,7 @@ import {getInitials} from '../../util/getInitials';
 
 const redPlus_Icon = require('../../assets/images/redplus.png');
 const reporterMan_Icon = require('../../assets/images/reporterman.png');
-const reporterWoman_Icon = require('../../assets/images/reporterwoman png');
+const reporterWoman_Icon = require('../../assets/images/reporterwoman.png');
 const doctorMan_Icon = require('../../assets/images/docman.png');
 const doctorWoman_Icon = require('../../assets/images/docwoman.png');
 
@@ -53,12 +53,6 @@ const CustomList = props => {
   const [items, setItems] = useState([]);
   const refArray = useRef([]);
   const {data, onEditClick, onDeleteClick, onItemClick} = props;
-
-  const [counter, setCounter] = useState(0);
-
-  setCounter(prevState => {
-    return prevState++;
-  });
 
   const mapData = useCallback(() => {
     const type = data[0].patient ? 'report' : 'user';

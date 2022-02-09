@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {ImageBackground, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {setMainRoot} from '../navigation';
 import {Navigation} from 'react-native-navigation';
 import {useNavigationCommand} from 'react-native-navigation-hooks';
@@ -16,20 +16,19 @@ const Drawer = props => {
   });
   useEffect(() => {
     // Navigation.g;
+    // return () => {
+    //   alert('cc');
+    // };
   }, []);
 
   return (
-    <ImageBackground
-      source={require('../assets/images/bg.jpg')}
-      resizeMode="cover"
-      style={styles.root}>
+    <View style={styles.root}>
       {/*<ImageBackground source={image} resizeMode="cover" style={styles.image}>*/}
       {/*    */}
       {/*</ImageBackground>*/}
       <View
         style={{
-          height: '25%',
-          backgroundColor: 'rgba(255,255,255,0.37)',
+          height: '25%', // backgroundColor: 'rgba(255,255,255,0.37)',
           justifyContent: 'center',
           alignItems: 'center',
           borderBottomColor: '#ddd',
@@ -48,7 +47,7 @@ const Drawer = props => {
           }}>
           <Text
             style={{
-              color: '#000',
+              color: '#ffffff',
               fontSize: 20,
               fontWeight: 'bold',
             }}>
@@ -57,7 +56,8 @@ const Drawer = props => {
         </View>
         <Text
           style={{
-            color: '#1b0455',
+            marginTop: 15,
+            color: '#ffffff',
             fontSize: 20,
             fontWeight: 'bold',
           }}>
@@ -65,104 +65,63 @@ const Drawer = props => {
         </Text>
         <Text
           style={{
-            color: '#1b0455',
+            color: '#ffffff',
             fontSize: 18,
           }}>
           {userState.userInfo.email}
         </Text>
       </View>
 
-      <View style={{height: '35%'}} spread>
+      <View style={{height: '25%'}} spread>
         <Icon.Button
           size={25}
-          color={'black'}
+          color={'white'}
           name="home"
           backgroundColor="transparent"
-          onPress={setMainRoot}>
-          <Text b1 darkBlue>
+          onPress={() => {
+            Navigation.mergeOptions('MainBottomTabsId', {
+              sideMenu: {
+                left: {
+                  visible: false,
+                },
+              },
+              bottomTabs: {
+                currentTabId: 'MainStack',
+              },
+            });
+          }}>
+          <Text b1 white>
             Home
           </Text>
         </Icon.Button>
-
         <Icon.Button
           size={25}
-          color={'black'}
-          name="file-text-o"
-          backgroundColor="transparent"
-          onPress={() => {
-            Navigation.mergeOptions(props.componentId, {
-              sideMenu: {
-                left: {
-                  visible: false,
-                },
-              },
-            });
-            Navigation.push('MainStack', {
-              component: {
-                name: 'com.erAssist.main.reports',
-              },
-            });
-          }}>
-          <Text b1 darkBlue>
-            Reports
-          </Text>
-        </Icon.Button>
-
-        <Icon.Button
-          size={25}
-          color={'black'}
+          color={'white'}
           name="wrench"
           backgroundColor="transparent"
           onPress={() => {
-            Navigation.mergeOptions(props.componentId, {
+            Navigation.mergeOptions('MainBottomTabsId', {
               sideMenu: {
                 left: {
                   visible: false,
                 },
               },
-            });
-            Navigation.push('MainStack', {
-              component: {
-                name: 'com.erAssist.main.manage',
+              bottomTabs: {
+                currentTabId: 'ManageStack',
               },
             });
           }}>
-          <Text b1 darkBlue>
+          <Text b1 white>
             Manage
           </Text>
         </Icon.Button>
-        {/*  ********************************  test screen **********************************************/}
-        <Icon.Button
-          size={25}
-          color={'black'}
-          name="wrench"
-          backgroundColor="transparent"
-          onPress={() => {
-            Navigation.mergeOptions(props.componentId, {
-              sideMenu: {
-                left: {
-                  visible: false,
-                },
-              },
-            });
-            Navigation.push('MainStack', {
-              component: {
-                name: 'com.erAssist.main.test',
-              },
-            });
-          }}>
-          <Text b1 darkBlue>
-            Test Screen
-          </Text>
-        </Icon.Button>
-        {/*  ********************************  test screen **********************************************/}
         <Icon.Button
           size={33}
-          color={'black'}
+          color={'white'}
           name="user"
           backgroundColor="transparent"
           onPress={setMainRoot}>
-          <Text b1 darkBlue>
+          <Text b1 white>
             Profile
           </Text>
         </Icon.Button>
@@ -172,7 +131,7 @@ const Drawer = props => {
           iconStyle={{
             transform: [{rotateY: '180deg'}],
           }}
-          color={'black'}
+          color={'white'}
           name="sign-out"
           backgroundColor="transparent"
           onPress={userActions.handleLogOut}>
@@ -181,7 +140,7 @@ const Drawer = props => {
           </Text>
         </Icon.Button>
       </View>
-    </ImageBackground>
+    </View>
   );
 };
 
@@ -199,7 +158,9 @@ const styles = StyleSheet.create({
   },
   root: {
     flex: 1,
-    backgroundColor: 'whitesmoke',
+    backgroundColor: '#0b2053',
+    borderRightWidth: 1,
+    borderRightColor: 'rgba(255,255,255,0.43)',
   },
 });
 

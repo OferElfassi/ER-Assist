@@ -8,36 +8,90 @@ export const mainRoot = {
         },
       },
       center: {
-        stack: {
-          id: 'MainStack', // This is the id we're going to use when interacting with the stack
+        bottomTabs: {
+          id: 'MainBottomTabsId',
           children: [
             {
-              component: {
-                name: 'com.erAssist.main.home',
-                options: {
-                  topBar: {
-                    hideOnScroll: true,
-                    leftButtons: [
-                      {
-                        id: 'buttonOne',
-                        icon: require('../assets/images/hamburger.png'),
-                      },
-                    ],
-
-                    background: {
-                      component: {
-                        name: 'com.erAssist.main.header',
-                        passProps: {title: 'Home'},
+              stack: {
+                id: 'MainStack',
+                children: [
+                  {
+                    component: {
+                      id: 'home_Screen_id',
+                      name: 'com.erAssist.main.home',
+                      options: {
+                        bottomTab: {
+                          text: 'Home',
+                          icon: require('../assets/images/home.png'),
+                        },
+                        topBar: {
+                          background: {
+                            component: {
+                              name: 'com.erAssist.main.header',
+                              passProps: {title: 'Home', showSearch: true},
+                            },
+                          },
+                        },
                       },
                     },
-                    drawBehind: false,
-                    visible: true,
-                    animate: true,
                   },
-                },
+                ],
+              },
+            },
+            {
+              stack: {
+                id: 'GeneratorStack',
+                children: [
+                  {
+                    component: {
+                      name: 'com.erAssist.main.generator',
+                      options: {
+                        bottomTab: {},
+                        topBar: {
+                          background: {
+                            component: {
+                              name: 'com.erAssist.main.header',
+                              passProps: {title: 'Report'},
+                            },
+                          },
+                        },
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+            {
+              id: 'dd',
+              stack: {
+                id: 'ManageStack',
+                children: [
+                  {
+                    component: {
+                      name: 'com.erAssist.main.manage',
+                      options: {
+                        bottomTab: {
+                          text: 'Manage',
+                          icon: require('../assets/images/settings.png'),
+                        },
+                        topBar: {
+                          background: {
+                            component: {
+                              name: 'com.erAssist.main.header',
+                              passProps: {title: 'Manage'},
+                            },
+                          },
+                        },
+                      },
+                    },
+                  },
+                ],
               },
             },
           ],
+          options: {
+            bottomTabs: {backgroundColor: '#0b2053'},
+          },
         },
       },
     },

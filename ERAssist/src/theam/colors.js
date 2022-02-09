@@ -32,6 +32,8 @@ export const loadColorsSettings = () => {
     h4: {fontSize: 22, fontWeight: '300', lineHeight: 32},
     h5: {fontSize: 12, fontWeight: '300', lineHeight: 16},
     b1: {fontSize: 22, fontWeight: '700', letterSpacing: 4, lineHeight: 32},
+    // light1: {fontSize: 34, fontWeight: '150', letterSpacing: 4, lineHeight: 32},
+    light2: {fontSize: 22, fontWeight: '700', letterSpacing: 4, lineHeight: 32},
   });
 
   Spacings.loadSpacings({

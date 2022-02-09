@@ -1,19 +1,17 @@
 import React from 'react';
-import {Button, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
+import ScreenHeader from '../navigation/ScreenHeader';
 
 const ReportScreen = props => {
   return (
     <View style={styles.root}>
+      <ScreenHeader pageTitle={'Report'} />
       <Text>Hello Reports Screen 👋</Text>
     </View>
   );
 };
 ReportScreen.options = {
-  topBar: {
-    title: {
-      text: 'ReportScreen',
-    },
-  },
+  topBar: {},
 };
 
 const styles = StyleSheet.create({
