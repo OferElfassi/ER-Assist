@@ -57,6 +57,16 @@ const CustomList = props => {
   const mapData = useCallback(() => {
     const type = data[0].patient ? 'report' : 'user';
     const mappedData = data.map((item, index) => {
+      const imageSrc =
+        type === 'report'
+          ? redPlus_Icon
+          : item.gender === 'male'
+          ? item.role === 'reporter'
+            ? reporterMan_Icon
+            : doctorMan_Icon
+          : item.role === 'reporter'
+          ? reporterWoman_Icon
+          : doctorWoman_Icon;
       return {
         type,
         id: item.id,
@@ -66,16 +76,7 @@ const CustomList = props => {
         name: type === 'report' ? item.patient.fullName : item.fullName,
         brief: type === 'report' ? item.anamnesis : item.role,
         timestamp: type === 'report' ? item.timestamp : '',
-        imageSource:
-          type === 'report'
-            ? redPlus_Icon
-            : item.gender === 'male'
-            ? item.role === 'reporter'
-              ? reporterMan_Icon
-              : doctorMan_Icon
-            : item.role === 'reporter'
-            ? reporterWoman_Icon
-            : doctorWoman_Icon,
+        imageSource: imageSrc,
         leftButton: {
           text: 'Edit',
           icon: edit_Icon,
@@ -90,7 +91,7 @@ const CustomList = props => {
             onPress: () => onDeleteClick({...item, type}),
           },
         ],
-        listOnPress: () => onItemClick({...item, type}),
+        listOnPress: () => onItemClick({...item, type, imageSrc}),
       };
     });
     setItems(mappedData);

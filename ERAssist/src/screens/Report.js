@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import ScreenHeader from '../navigation/ScreenHeader';
 import {Navigation} from 'react-native-navigation';
 import PropTypes from 'prop-types';
@@ -26,7 +26,7 @@ const ReportScreen = props => {
         pageTitle={'Report'}
         pageSubTitle={report.patient.fullName}
       />
-      <View style={styles.content}>
+      <ScrollView style={styles.content}>
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>General Info</Text>
           <View style={styles.field}>
@@ -83,7 +83,7 @@ const ReportScreen = props => {
           <Text style={styles.sectionTitle}>Anamnesis</Text>
           <Text style={styles.infoText}>{report.anamnesis}</Text>
         </View>
-      </View>
+      </ScrollView>
     </View>
   );
 };
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'whitesmoke',
   },
   content: {
-    flex: 1,
+    // flex: 1,
     marginTop: 10,
     marginLeft: 10,
   },

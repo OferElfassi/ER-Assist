@@ -107,7 +107,16 @@ const userItems = [
 ];
 
 const HomeScreen = props => {
-  const handleUserClick = user => {};
+  const handleUserClick = user => {
+    Navigation.push('MainStack', {
+      component: {
+        name: 'com.erAssist.main.user',
+        passProps: {
+          user: user,
+        },
+      },
+    });
+  };
   const handleReportClickClick = report => {
     Navigation.push('MainStack', {
       component: {
@@ -132,7 +141,7 @@ const HomeScreen = props => {
                   data={userItems}
                   onDeleteClick={() => {}}
                   onEditClick={() => {}}
-                  onItemClick={() => {}}
+                  onItemClick={handleUserClick}
                 />
               ),
             },

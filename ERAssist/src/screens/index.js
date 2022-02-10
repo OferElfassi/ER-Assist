@@ -8,6 +8,7 @@ import Drawer from './Drawer';
 import TestScreen from './TestScreen';
 import ReportGenerator from './ReportGenerator';
 import ReportScreen from './Report';
+import UserScreen from './User';
 
 export {
   HomeScreen,
@@ -20,4 +21,5 @@ export {
   TestScreen,
   ReportGenerator,
   ReportScreen,
+  UserScreen,
 };

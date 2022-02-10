@@ -15,7 +15,7 @@ import {
   LoginScreen,
   ManageScreen,
   ReportGenerator,
-  ReportsScreen,
+  UserScreen,
   SignupScreen,
   TestScreen,
   ReportScreen,
@@ -181,11 +181,11 @@ const registerScreens = store => {
     () => withNavigationProvider(WrapScreen(OverlayTabButton, store)),
     () => OverlayTabButton,
   );
-  //=========================TestScreen======================//
+  //=========================UserScreen======================//
   Navigation.registerComponent(
-    'com.erAssist.main.test',
-    () => withNavigationProvider(WrapScreen(TestScreen, store)),
-    () => TestScreen,
+    'com.erAssist.main.user',
+    () => withNavigationProvider(WrapScreen(UserScreen, store)),
+    () => UserScreen,
   );
 
   registerMiddleTabButton();
