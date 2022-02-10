@@ -23,6 +23,7 @@ const reportItems = [
     reporter: {fullName: 'Dekel Ben-David', id: '2434r54545d34'},
     medicines: [{name: 'norofen', amount: 3}],
     anamnesis: 'quick  treatment',
+    organization: 'quick  treatment',
     treatment: [{action: 'none', timeStamp: ''}],
   },
 ];
@@ -35,6 +36,7 @@ const userItems = [
     phone: '052252844',
     gender: 'male',
     role: 'reporter',
+    organization: 'reporter',
     isManager: false,
     isDoctor: false,
   },
