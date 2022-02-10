@@ -1,12 +1,14 @@
 export const authRoot = {
   root: {
     bottomTabs: {
+      id: 'AuthBottomTabsId',
       children: [
         {
           stack: {
             children: [
               {
                 component: {
+                  id: 'login_Screen_id',
                   name: 'com.erAssist.auth.login',
                 },
               },
@@ -41,6 +43,9 @@ export const authRoot = {
           },
         },
       ],
+      options: {
+        bottomTabs: {backgroundColor: '#0b2053'},
+      },
     },
   },
 };

@@ -31,8 +31,7 @@ const initStore = () => {
     if (!store.getState().user.isLoggedIn) {
       setMainRoot();
     } else {
-      // setAuthRoot();
-      setMainRoot();
+      setAuthRoot();
     }
   });
   return store;

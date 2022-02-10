@@ -29,7 +29,7 @@ const userItems = [
   {
     fullName: 'Ofer Elfassi',
     email: 'ofer221@hotmail.com',
-    userId: '2434rd34',
+    id: '2434rd34',
     address: 'Tel-Aviv, Cordovero 15/1',
     phone: '052252844',
     gender: 'male',
@@ -39,7 +39,7 @@ const userItems = [
   {
     fullName: 'Dekel-BenDavid',
     email: 'dekelb@gmail.com',
-    userId: '43534545',
+    id: '43534545',
     address: 'Givataim, Herzel 15/1',
     phone: '058647845',
     gender: 'male',
@@ -98,8 +98,10 @@ const CustomList = props => {
   }, [data, onEditClick, onDeleteClick, onItemClick]);
 
   useEffect(() => {
-    refArray.current = refArray.current.slice(0, data.length);
-    mapData();
+    if (data && data.length !== 0) {
+      refArray.current = refArray.current.slice(0, data.length);
+      mapData();
+    }
   }, [data, mapData]);
 
   const closeLast = index => {

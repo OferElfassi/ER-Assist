@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {useCallback} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import * as userActions from '../store/actions/userActions';
 
 export default function useUser() {
@@ -15,6 +15,9 @@ export default function useUser() {
   const signup = (/**userState*/ signupInfo) => {
     dispatch(userActions.signup(signupInfo));
   };
+  // const deleteUser = userId => {
+  //   dispatch(userActions.deleteUser(userId));
+  // };
 
   const handleLogOut = () => {
     dispatch(userActions.handleLogOut());
@@ -26,6 +29,7 @@ export default function useUser() {
     userActions: {
       login: useCallback(login, []),
       signup: useCallback(signup, []),
+      // deleteUser: useCallback(deleteUser, []),
       handleLogOut: useCallback(handleLogOut, []),
     },
   };

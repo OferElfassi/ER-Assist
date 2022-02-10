@@ -44,3 +44,21 @@ export const setErrorMessage = (errMsg, source = '') => {
     );
   };
 };
+export const setMessageModal = (message, onOk = null) => {
+  return (dispatch, getState) => {
+    dispatch(
+      setModal({
+        modalVisible: true,
+        modalText: message,
+        okText: 'ok',
+        cancelText: '',
+        onOk: () => {
+          if (onOk) {
+            onOk();
+          }
+          dispatch(closeModal());
+        },
+      }),
+    );
+  };
+};

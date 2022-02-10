@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StyleSheet} from 'react-native';
 import {View} from 'react-native-ui-lib';
 import ScreenHeader from '../navigation/ScreenHeader';
 import CustomList from '../components/CustomList/CustomList';
 import CustomTabs from '../components/CustomTabs/CustomTabs';
 import {Navigation} from 'react-native-navigation';
+import {useData} from '../hooks';
 
 const reportItems = [
   {
@@ -31,7 +32,7 @@ const userItems = [
   {
     fullName: 'Ofer Elfassi',
     email: 'ofer221@hotmail.com',
-    userId: '2434rd34',
+    id: '2434rd34',
     address: 'Tel-Aviv, Cordovero 15/1',
     phone: '052252844',
     gender: 'male',
@@ -43,7 +44,7 @@ const userItems = [
   {
     fullName: 'Dekel BenDavid',
     email: 'dekelb@gmail.com',
-    userId: '43534545',
+    id: '43534545',
     address: 'Givataim, Herzel 15/1',
     phone: '058647845',
     gender: 'male',
@@ -54,7 +55,7 @@ const userItems = [
   {
     fullName: 'Ofer Elfassi',
     email: 'ofer221@hotmail.com',
-    userId: '2434rd34',
+    id: '2434rd34',
     address: 'Tel-Aviv, Cordovero 15/1',
     phone: '052252844',
     gender: 'girl',
@@ -65,7 +66,7 @@ const userItems = [
   {
     fullName: 'Dekel BenDavid',
     email: 'dekelb@gmail.com',
-    userId: '43534545',
+    id: '43534545',
     address: 'Givataim, Herzel 15/1',
     phone: '058647845',
     gender: 'girl',
@@ -76,7 +77,7 @@ const userItems = [
   {
     fullName: 'Dekel BenDavid',
     email: 'dekelb@gmail.com',
-    userId: '43534545',
+    id: '43534545',
     address: 'Givataim, Herzel 15/1',
     phone: '058647845',
     gender: 'male',
@@ -87,7 +88,7 @@ const userItems = [
   {
     fullName: 'Ofer Elfassi',
     email: 'ofer221@hotmail.com',
-    userId: '2434rd34',
+    id: '2434rd34',
     address: 'Tel-Aviv, Cordovero 15/1',
     phone: '052252844',
     gender: 'girl',
@@ -98,7 +99,7 @@ const userItems = [
   {
     fullName: 'Dekel BenDavid',
     email: 'dekelb@gmail.com',
-    userId: '43534545',
+    id: '43534545',
     address: 'Givataim, Herzel 15/1',
     phone: '058647845',
     gender: 'girl',
@@ -109,6 +110,13 @@ const userItems = [
 ];
 
 const HomeScreen = props => {
+  const {dataState, dataActions} = useData();
+
+  useEffect(() => {
+    dataActions.getUsers();
+    dataActions.getReports();
+  }, []);
+
   const handleUserClick = user => {
     Navigation.push('MainStack', {
       component: {

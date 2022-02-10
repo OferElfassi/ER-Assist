@@ -2,6 +2,7 @@
 import {useCallback} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import * as uiActions from '../store/actions/uiActions';
+import {setMessageModal} from '../store/actions/uiActions';
 
 export default function useUi() {
   /** @type {uiState} */
@@ -15,6 +16,9 @@ export default function useUi() {
   const setErrorMessage = msg => {
     dispatch(uiActions.setErrorMessage(msg));
   };
+  const setMessageModal = msg => {
+    dispatch(uiActions.setErrorMessage(msg));
+  };
 
   return {
     /** @type {uiState} */
@@ -22,6 +26,7 @@ export default function useUi() {
     uiActions: {
       toggleLoaderIndicator: useCallback(toggleLoaderIndicator, []),
       setErrorMessage: useCallback(setErrorMessage, []),
+      setMessageModal: useCallback(setMessageModal, []),
     },
   };
 }

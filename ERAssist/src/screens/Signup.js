@@ -1,27 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, ScrollView} from 'react-native';
-import {setMainRoot} from '../navigation';
-import {
-  Button,
-  View,
-  Text,
-  Switch,
-  Wizard,
-  RadioButton,
-  RadioGroup,
-  Picker,
-  Incubator,
-  Image,
-  Colors,
-} from 'react-native-ui-lib';
+import {Colors, Image, Incubator, Text, View} from 'react-native-ui-lib';
 import CustomWizard from '../components/CustomWizard/CustomWizard';
 import CustomRadio from '../components/CustomRadio/CustomRadio';
 import CustomPicker from '../components/CustomPicker/CustomPicker';
-import {useUi, useUser, useData} from '../hooks';
+import {useData, useUi, useUser} from '../hooks';
 
 const {TextField} = Incubator;
-import Loader from '../components/Loader/Loader';
 
 /**
  * username
@@ -42,7 +28,11 @@ const options = [
 
 const roleOptions = [
   {value: 'reporter', label: 'Reporter'},
-  {value: 'manager', label: 'Manager'},
+  {value: 'doctor', label: 'Doctor/Manager'},
+];
+const genderOptions = [
+  {value: 'male', label: 'Male'},
+  {value: 'female', label: 'Female'},
 ];
 
 const organizationOptions = [
@@ -61,7 +51,10 @@ const initialSignupInfoState = {
   address: '',
   phone: '',
   organization: '',
+  role: 'doctor',
+  gender: 'female',
   isManager: false,
+  isMale: false,
 };
 const initialSignupValidState = {
   fullName: false,
@@ -72,6 +65,7 @@ const initialSignupValidState = {
   phone: false,
   organization: false,
   isManager: true,
+  isMale: true,
 };
 
 const SignupScreen = () => {
@@ -132,7 +126,15 @@ const SignupScreen = () => {
   };
 
   const handleSignupSubmit = () => {
+    setSignupInfo(prevState => {
+      return {
+        ...prevState,
+        gender: prevState.isMale ? 'male' : 'female',
+        role: prevState.isManager ? 'doctor' : 'reporter',
+      };
+    });
     console.log(signupInfo, signupValidity);
+    userActions.signup(signupInfo);
   };
 
   const personalInfoForm = () => {
@@ -200,8 +202,12 @@ const SignupScreen = () => {
   };
 
   const onRoleChange = role => {
-    const setRoleFunc = handleChange('isManager');
-    setRoleFunc(role === 'manager');
+    const setManagerFunc = handleChange('isManager');
+    setManagerFunc(role === 'doctor');
+  };
+  const onGenderChange = gender => {
+    const setGenderFunc = handleChange('isMale');
+    setGenderFunc(gender === 'male');
   };
 
   const onOrganizationChange = organization => {
@@ -213,11 +219,18 @@ const SignupScreen = () => {
 
   const organizationInfoForm = () => {
     return (
-      <View style={styles.formContainer}>
+      <ScrollView style={styles.formContainer}>
         <CustomRadio
           options={roleOptions}
           title={'Select Role'}
           onChange={onRoleChange}
+          row
+          marginT-15
+        />
+        <CustomRadio
+          options={genderOptions}
+          title={'Select Gender'}
+          onChange={onGenderChange}
           row
           marginT-15
         />
@@ -250,7 +263,7 @@ const SignupScreen = () => {
             fieldStyle={styles.withUnderline}
           />
         </View>
-      </View>
+      </ScrollView>
     );
   };
 
@@ -314,7 +327,7 @@ const SignupScreen = () => {
           {component: setPasswordForm(), title: 'Set Password'},
         ]}
         finishBtnText={'Done & Signup'}
-        finishBtnDisabled={!isFormValid()}
+        finishBtnDisabled={false}
         onFinish={handleSignupSubmit}
       />
     </View>

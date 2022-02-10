@@ -1,6 +1,6 @@
 import NetInfo from '@react-native-community/netinfo';
 
-let baseUrl = 'http://10.0.0.57:5000';
+let baseUrl = 'http://10.0.0.57:3000';
 
 export const checkConnection = async () => {
   const NetInfoState = await NetInfo.fetch();

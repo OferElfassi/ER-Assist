@@ -30,7 +30,7 @@ const CustomTabs = props => {
         asCarousel={true}
         initialIndex={0}
         onChangeIndex={this.onChangeIndex}
-        items={items}>
+        items={items || []}>
         <TabController.TabBar
           // items={items}
           key={'tabPage'}

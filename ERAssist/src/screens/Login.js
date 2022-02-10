@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet} from 'react-native';
+import {useUser} from '../hooks';
 import {setMainRoot} from '../navigation';
 import {
   Button,
@@ -10,7 +11,6 @@ import {
   Colors,
   Incubator,
 } from 'react-native-ui-lib';
-import {useUser} from '../hooks';
 
 const {TextField} = Incubator;
 const initialLoginState = {email: '', password: ''};

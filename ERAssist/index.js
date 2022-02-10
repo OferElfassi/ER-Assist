@@ -9,7 +9,7 @@ import initStore from './src/store/store';
 const store = initStore();
 loadColorsSettings();
 loadColorScheme('light');
-
+console.disableYellowBox = true;
 const isUserLoggedIn = () => {
   return false;
 };

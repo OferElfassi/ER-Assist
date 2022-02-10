@@ -1,6 +1,4 @@
 const mongoose = require("mongoose");
-const user = require("user-model");
-const Schema = mongoose.Schema;
 const reportSchema = new mongoose.Schema({
   timestamp: { type: Date },
   patient: { fullName: String, id: String },

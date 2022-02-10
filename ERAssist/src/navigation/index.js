@@ -15,10 +15,9 @@ import {
   LoginScreen,
   ManageScreen,
   ReportGenerator,
-  UserScreen,
-  SignupScreen,
-  TestScreen,
   ReportScreen,
+  SignupScreen,
+  UserScreen,
 } from '../screens';
 
 const WrapScreen = (ReduxScreen, store) => props =>
@@ -50,7 +49,7 @@ const registerMiddleTabButton = () => {
         },
       },
     },
-  });
+  }).then(() => {});
 };
 const applyModalDismissListener = () => {
   // Navigation.events().registerComponentDidDisappearListener(
@@ -71,7 +70,9 @@ const applyModalDismissListener = () => {
   // );
   Navigation.events().registerComponentDidAppearListener(({componentId}) => {
     if (componentId === 'sideDrawer') {
-      Navigation.dismissOverlay('PlusBtn');
+      Navigation.dismissOverlay('PlusBtn').then(() => {
+        console.log('plus btn registered');
+      });
     }
   });
 
@@ -89,8 +90,10 @@ const applyBottomTabSelectedListener = () => {
           bottomTabs: {currentTabIndex: unselectedTabIndex},
         });
       } else {
-        registerMiddleTabButton();
-        Navigation.popToRoot('MainStack');
+        // registerMiddleTabButton();
+        // Navigation.popToRoot('MainStack').then(() => {
+        //   console.log('back to root');
+        // });
       }
     },
   );
@@ -104,6 +107,7 @@ const applyDefaultOptions = () => {
       textColor: 'white',
       selectedIconColor: '#2E8BFB',
       selectedTextColor: '#2E8BFB',
+      backgroundColor: '#0b2053',
     },
     topBar: {
       height: 65,
@@ -188,15 +192,21 @@ const registerScreens = store => {
     () => UserScreen,
   );
 
-  registerMiddleTabButton();
+  // registerMiddleTabButton();
   applyBottomTabSelectedListener();
   applyModalDismissListener();
   applyDefaultOptions();
 };
 const setMainRoot = () => {
-  Navigation.setRoot(mainRoot);
+  Navigation.setRoot(mainRoot).then(() => {
+    registerMiddleTabButton();
+  });
 };
 const setAuthRoot = () => {
-  Navigation.setRoot(authRoot);
+  Navigation.setRoot(authRoot).then(() => {
+    Navigation.dismissOverlay('PlusBtn').then(() => {
+      console.log('overlay dismissed');
+    });
+  });
 };
 export {registerScreens, setMainRoot, setAuthRoot};

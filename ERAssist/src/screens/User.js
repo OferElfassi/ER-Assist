@@ -49,7 +49,7 @@ const UserScreen = props => {
 
           <View style={styles.field}>
             <Text style={styles.label}>User ID:</Text>
-            <Text style={styles.infoText}>{user.userId}</Text>
+            <Text style={styles.infoText}>{user.id}</Text>
           </View>
 
           <View style={styles.field}>

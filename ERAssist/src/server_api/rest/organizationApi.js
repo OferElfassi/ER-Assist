@@ -8,3 +8,14 @@ export const getOrganizationsList = async () => {
     throw e;
   }
 };
+export const addOrganizations = async organization => {
+  try {
+    let res = await serverApi.post(
+      '/organizations',
+      /**organization*/ organization,
+    );
+    return await serverApi.handleResult(res, 'Add Organizations Error');
+  } catch (e) {
+    throw e;
+  }
+};
