@@ -148,7 +148,7 @@ const HomeScreen = props => {
               key: 'Users',
               component: (
                 <CustomList
-                  data={userItems}
+                  data={dataState.users}
                   onDeleteClick={() => {}}
                   onEditClick={() => {}}
                   onItemClick={handleUserClick}
@@ -160,7 +160,7 @@ const HomeScreen = props => {
               key: 'Reports',
               component: (
                 <CustomList
-                  data={reportItems}
+                  data={dataState.reports}
                   onDeleteClick={() => {}}
                   onEditClick={() => {}}
                   onItemClick={handleReportClickClick}

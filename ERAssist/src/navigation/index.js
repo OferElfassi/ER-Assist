@@ -52,22 +52,6 @@ const registerMiddleTabButton = () => {
   }).then(() => {});
 };
 const applyModalDismissListener = () => {
-  // Navigation.events().registerComponentDidDisappearListener(
-  //   ({componentId, componentName}) => {
-  //     if (componentId === 'GeneratorStack') {
-  //       registerMiddleTabButton();
-  //       alert('dd');
-  //     }
-  //   },
-  // );
-  // Navigation.events().registerModalDismissedListener(
-  //   ({componentId, modalsDismissed}) => {
-  //     if (componentId === 'GeneratorStack') {
-  //       registerMiddleTabButton();
-  //     }
-  //     console.log('registerModalDismissedListener', componentId);
-  //   },
-  // );
   Navigation.events().registerComponentDidAppearListener(({componentId}) => {
     if (componentId === 'sideDrawer') {
       Navigation.dismissOverlay('PlusBtn').then(() => {
@@ -89,11 +73,6 @@ const applyBottomTabSelectedListener = () => {
         Navigation.mergeOptions('home_Screen_id', {
           bottomTabs: {currentTabIndex: unselectedTabIndex},
         });
-      } else {
-        // registerMiddleTabButton();
-        // Navigation.popToRoot('MainStack').then(() => {
-        //   console.log('back to root');
-        // });
       }
     },
   );

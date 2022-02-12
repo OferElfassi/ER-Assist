@@ -85,7 +85,10 @@ export const handleResult = async (
   customMessage = null,
 ) => {
   let resData = await res.json();
-  if (res && resData && res.status < 400) return resData;
+  if (res && resData && res.status < 400) {
+    console.log('response', resData);
+    return resData;
+  }
   if (customMessage) throw new Error(customMessage);
   else if (!res) throw new Error(`${errSrc}: Server not responding`);
   else if (!resData) throw new Error(`${errSrc}: Server response was empty`);

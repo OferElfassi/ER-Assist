@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const { DB_USER, DB_PASS, DB_HOST, DB_NAME } = require("./config/keys");
+const databaseInitialization = require("./utils/database-initialization");
+
 const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -14,6 +16,13 @@ console.log(DB_HOST);
 
 mongoose.connection.on("connected", () => {
   console.log("Database connected");
+  databaseInitialization()
+    .then(() => {
+      console.log("Database initialization success");
+    })
+    .catch((e) => {
+      console.log("Database initialization failed", e);
+    });
 });
 
 mongoose.connection.on("error", (err) => {

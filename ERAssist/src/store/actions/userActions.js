@@ -32,16 +32,16 @@ export const logout = () => {
 export const login = ({email, password}) => {
   return async dispatch => {
     try {
-      dispatch(setUserData(tempUser));
-      setMainRoot();
-      // const userInfo = await userApi.login(email, password);
-      // if (userInfo) {
-      //   console.warn(userInfo.data);
-      //   dispatch(setUserData(userInfo.data));
-      //   setMainRoot();
-      // } else {
-      //   throw new Error('Login Error');
-      // }
+      // dispatch(setUserData(tempUser));
+      // setMainRoot();
+      const userInfo = await userApi.login(email, password);
+      if (userInfo) {
+        console.warn(userInfo.data);
+        dispatch(setUserData(userInfo.data));
+        setMainRoot();
+      } else {
+        throw new Error('Login Error');
+      }
     } catch (e) {
       console.warn('login error', e);
     }

@@ -58,8 +58,8 @@ const initialState = {
 export const userReducer = produce((/**userState*/ draft, {type, payload}) => {
   switch (type) {
     case actionTypes.SET_USER:
-      Object.assign(draft.userInfo, payload);
-      draft.userInfo.id = payload._id;
+      Object.assign(draft.userInfo, payload.user);
+      draft.userInfo.id = payload.user._id;
       draft.isLoggedIn = true;
       draft.token = payload.token;
       break;
