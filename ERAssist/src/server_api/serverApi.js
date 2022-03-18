@@ -1,6 +1,7 @@
 import NetInfo from '@react-native-community/netinfo';
 
-let baseUrl = 'http://10.0.0.57:3000';
+// let baseUrl = 'http://10.0.0.57:3000';
+let baseUrl = 'https://er-assist.herokuapp.com';
 
 export const checkConnection = async () => {
   const NetInfoState = await NetInfo.fetch();
@@ -86,7 +87,7 @@ export const handleResult = async (
 ) => {
   let resData = await res.json();
   if (res && resData && res.status < 400) {
-    console.log('response', resData);
+    // console.log('response', resData);
     return resData;
   }
   if (customMessage) throw new Error(customMessage);

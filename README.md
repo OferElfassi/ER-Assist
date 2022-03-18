@@ -24,11 +24,32 @@
     <a href="https://github.com/OferElfassi/ER-Assist/pulls">Request Feature</a>
   </p>
 </p>
+<!-- TABLE OF CONTENTS -->
 
+### Table of Contents
 
+* [About the Project](#about-the-project)
+    * [Built With](#built-with)
+* [ScreenShoots](#Application-ScreenShoots)
+* [Contact](#contact)
 
+<!-- ABOUT THE PROJECT -->
+## About The Project
+Android app for medical reports management
+### Built With
 
+* [Create react native app](https://github.com/expo/create-react-native-app)
+* [wix / react-native-navigation](https://github.com/wix/react-native-navigation)
+* [wix / react-native-ui-lib](https://github.com/wix/react-native-ui-lib)
+* [Express](https://expressjs.com/)
+* [MongoDB](https://www.mongodb.com/)
 
+<!-- Application ScreenShoot -->
+## Application ScreenShoots
+![2](https://user-images.githubusercontent.com/13490629/159041256-bd6d8d61-278c-4434-85f3-2283da7408cb.png)
+![3](https://user-images.githubusercontent.com/13490629/159041273-32eeafb5-9854-4068-ac81-c6710be92507.png)
+![4](https://user-images.githubusercontent.com/13490629/159041283-758083b7-59ff-460c-a3dc-ee08c3554121.png)
+![5](https://user-images.githubusercontent.com/13490629/159041289-ceec770e-13e9-43f7-ae78-84e9382658f6.png)
 <!-- CONTACT -->
 ## Contact
 

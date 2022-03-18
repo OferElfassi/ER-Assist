@@ -103,11 +103,10 @@ export const deleteReport = report => {
 
       if (!userInfo.isManager) {
       }
-
       await reportApi.deleteReport(report.id);
       dispatch(removeReport(report.id));
     } catch (e) {
-      console.warn('get reports Error', e);
+      console.warn('delete reports Error', e);
     }
   };
 };
@@ -125,7 +124,7 @@ export const deleteUser = user => {
       await userApi.deleteUser(user.id);
       dispatch(removeUser(user.id));
     } catch (e) {
-      console.warn('get reports Error', e);
+      console.warn('delete User Error', e);
     }
   };
 };

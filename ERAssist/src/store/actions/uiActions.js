@@ -1,4 +1,5 @@
 import * as actionTypes from '../actionTypes';
+import {hideMessageModal, showMessageModal} from '../../navigation';
 
 export const toggleLoaderIndicator = state => {
   return {
@@ -8,6 +9,9 @@ export const toggleLoaderIndicator = state => {
 };
 
 export const setModal = (/** @type {modal} */ modalData) => {
+  modalData.modalVisible && modalData.modalVisible !== ''
+    ? showMessageModal()
+    : hideMessageModal();
   return {
     type: actionTypes.SET_MODAL,
     payload: modalData,

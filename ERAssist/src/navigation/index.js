@@ -5,9 +5,9 @@ import {Navigation} from 'react-native-navigation';
 import {withNavigationProvider} from 'react-native-navigation-hooks';
 import {Provider} from 'react-redux';
 import Loader from '../components/Loader/Loader';
-import CustomModal from '../components/CustomModal/CustomModal';
 import Header from './Header';
 import OverlayTabButton from './OverlayTabButton';
+import MessageModal from './MessageModal';
 import {
   Drawer,
   FormsScreen,
@@ -25,7 +25,6 @@ const WrapScreen = (ReduxScreen, store) => props =>
     <Provider store={store}>
       <ReduxScreen {...props} />
       <Loader {...props} />
-      <CustomModal {...props} />
     </Provider>
   );
 
@@ -50,6 +49,32 @@ const registerMiddleTabButton = () => {
       },
     },
   }).then(() => {});
+};
+const showMessageModal = () => {
+  console.log('calling show msg modal');
+  Navigation.showOverlay({
+    component: {
+      name: 'com.erAssist.main.modal',
+      id: 'message_modal',
+      options: {
+        layout: {
+          id: 'message_modal',
+        },
+        overlay: {
+          interceptTouchOutside: true,
+        },
+      },
+    },
+  })
+    .then(() => {
+      console.log('showing msg modal');
+    })
+    .catch(e => {
+      console.log('modal error', e);
+    });
+};
+const hideMessageModal = () => {
+  Navigation.dismissOverlay('message_modal').then(() => {});
 };
 const applyModalDismissListener = () => {
   Navigation.events().registerComponentDidAppearListener(({componentId}) => {
@@ -170,6 +195,12 @@ const registerScreens = store => {
     () => withNavigationProvider(WrapScreen(UserScreen, store)),
     () => UserScreen,
   );
+  //=========================MessageModal======================//
+  Navigation.registerComponent(
+    'com.erAssist.main.modal',
+    () => withNavigationProvider(WrapScreen(MessageModal, store)),
+    () => MessageModal,
+  );
 
   // registerMiddleTabButton();
   applyBottomTabSelectedListener();
@@ -188,4 +219,10 @@ const setAuthRoot = () => {
     });
   });
 };
-export {registerScreens, setMainRoot, setAuthRoot};
+export {
+  registerScreens,
+  setMainRoot,
+  setAuthRoot,
+  showMessageModal,
+  hideMessageModal,
+};

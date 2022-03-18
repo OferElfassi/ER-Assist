@@ -31,6 +31,7 @@ exports.deleteUser = async (req, res, next) => {
     // if (!req.user.isManager || !req.user._id === req.params.userId) {
     //   throw new HttpError("Unauthorized", 401);
     // }
+    console.log(req.params);
     await User.deleteOne({ _id: req.params.userId });
     res.status(200).json({ message: "success", data: null });
   } catch (e) {

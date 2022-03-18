@@ -52,7 +52,7 @@ const CustomList = props => {
   const [lastIndex, setLastIndex] = useState(undefined);
   const [items, setItems] = useState([]);
   const refArray = useRef([]);
-  const {data, onEditClick, onDeleteClick, onItemClick} = props;
+  const {data, onEditClick, onDeleteClick, onItemClick, userInfo} = props;
 
   const mapData = useCallback(() => {
     const type = data[0].patient ? 'report' : 'user';
@@ -67,6 +67,28 @@ const CustomList = props => {
           : item.role === 'reporter'
           ? reporterWoman_Icon
           : doctorWoman_Icon;
+      let leftBtn = null;
+      let rightBtn = null;
+      if (
+        (type === 'report' &&
+          item.role === 'reporter' &&
+          item.reporter.id === userInfo.id) ||
+        userInfo.isManager
+      ) {
+        leftBtn = {
+          text: 'Edit',
+          icon: edit_Icon,
+          background: Colors.green30,
+          onPress: () => onEditClick({...item, type}),
+        };
+        rightBtn = {
+          text: 'Delete',
+          icon: delete_Icon,
+          background: Colors.red30,
+          onPress: () => onDeleteClick({...item, type}),
+        };
+      }
+
       return {
         type,
         id: item.id,
@@ -77,20 +99,8 @@ const CustomList = props => {
         brief: type === 'report' ? item.anamnesis : item.role,
         timestamp: type === 'report' ? item.timestamp : '',
         imageSource: imageSrc,
-        leftButton: {
-          text: 'Edit',
-          icon: edit_Icon,
-          background: Colors.green30,
-          onPress: () => onEditClick({...item, type}),
-        },
-        rightButton: [
-          {
-            text: 'Delete',
-            icon: delete_Icon,
-            background: Colors.red30,
-            onPress: () => onDeleteClick({...item, type}),
-          },
-        ],
+        leftButton: leftBtn,
+        rightButton: [rightBtn],
         listOnPress: () => onItemClick({...item, type, imageSrc}),
       };
     });
@@ -149,6 +159,7 @@ CustomList.propTypes = {
   onItemClick: PropTypes.func,
   onEditClick: PropTypes.func,
   onDeleteClick: PropTypes.func,
+  userInfo: PropTypes.object,
 };
 
 export default CustomList;

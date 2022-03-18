@@ -3,7 +3,7 @@
 import React, {useState} from 'react';
 import {StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
-import {View, Text, RadioButton, RadioGroup, Picker} from 'react-native-ui-lib';
+import {Picker, Text} from 'react-native-ui-lib';
 import dropdownIcon from '../../assets/icons/chevronDown.png';
 
 const options = [
@@ -15,9 +15,7 @@ const options = [
 ];
 
 const CustomPicker = props => {
-  const [selectedOption, setSelectedOption] = useState(
-    props.initialValue || props.options[0].value,
-  );
+  const [selectedOption, setSelectedOption] = useState('');
 
   const onValueChange = val => {
     setSelectedOption(val);

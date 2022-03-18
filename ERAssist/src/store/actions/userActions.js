@@ -43,7 +43,8 @@ export const login = ({email, password}) => {
         throw new Error('Login Error');
       }
     } catch (e) {
-      console.warn('login error', e);
+      dispatch(uiActions.setMessageModal(e.message));
+      console.warn('login error', e.message);
     }
   };
 };

@@ -32,6 +32,7 @@ export default function useData() {
       getUsers: useCallback(getUsers, []),
       getReports: useCallback(getReports, []),
       deleteUser: useCallback(deleteUser, []),
+      deleteReport: useCallback(deleteReport, []),
     },
   };
 }

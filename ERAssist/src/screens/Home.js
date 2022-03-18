@@ -5,7 +5,7 @@ import ScreenHeader from '../navigation/ScreenHeader';
 import CustomList from '../components/CustomList/CustomList';
 import CustomTabs from '../components/CustomTabs/CustomTabs';
 import {Navigation} from 'react-native-navigation';
-import {useData} from '../hooks';
+import {useData, useUser} from '../hooks';
 
 const reportItems = [
   {
@@ -111,6 +111,7 @@ const userItems = [
 
 const HomeScreen = props => {
   const {dataState, dataActions} = useData();
+  const {userState, userActions} = useUser();
 
   useEffect(() => {
     dataActions.getUsers();
@@ -149,9 +150,10 @@ const HomeScreen = props => {
               component: (
                 <CustomList
                   data={dataState.users}
-                  onDeleteClick={() => {}}
+                  onDeleteClick={dataActions.deleteUser}
                   onEditClick={() => {}}
                   onItemClick={handleUserClick}
+                  userInfo={userState.userInfo}
                 />
               ),
             },
@@ -161,9 +163,10 @@ const HomeScreen = props => {
               component: (
                 <CustomList
                   data={dataState.reports}
-                  onDeleteClick={() => {}}
+                  onDeleteClick={dataActions.deleteReport}
                   onEditClick={() => {}}
                   onItemClick={handleReportClickClick}
+                  userInfo={userState.userInfo}
                 />
               ),
             },

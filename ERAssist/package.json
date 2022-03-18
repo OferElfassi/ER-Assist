@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
+    "android_release": "react-native run-android --variant=release",
     "ios": "react-native run-ios",
     "start": "react-native start --reset-cache",
     "reverse": "adb -s R58M3052Q5W reverse tcp:8081 tcp:8081",
