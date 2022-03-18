@@ -41,6 +41,7 @@ Android app for medical reports management
 * [Create react native app](https://github.com/expo/create-react-native-app)
 * [wix / react-native-navigation](https://github.com/wix/react-native-navigation)
 * [wix / react-native-ui-lib](https://github.com/wix/react-native-ui-lib)
+* [Redux - state management](https://redux.js.org/)
 * [Express](https://expressjs.com/)
 * [MongoDB](https://www.mongodb.com/)
 
