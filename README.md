@@ -14,10 +14,10 @@
     <a href="#"><strong>Explore the Application docs »</strong></a>
 <br />
     <a href="https://github.com/OferElfassi/blackjack/files/7668481/ER-Assist.SRS.pdf"><strong>SRS </strong></a>|
-    <a href="https://github.com/OferElfassi/blackjack/files/7668480/SDD.pdf"><strong>SDD</strong></a>
+    <a href="https://github.com/OferElfassi/blackjack/files/7668480/SDD.pdf"><strong>SDD </strong></a>
     <br />
     <br />
-    <a href="#">API Endpoint</a>
+    <a href="https://bit.ly/3tl9ef6">Download apk</a>
     ·
     <a href="https://github.com/OferElfassi/ER-Assist/issues">Report Bug</a>
     ·
